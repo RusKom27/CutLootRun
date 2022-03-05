@@ -1,0 +1,190 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://UI/Frames/ui_button.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/StartMenu.gd" type="Script" id=2]
+[ext_resource path="res://UI/MinecraftRegular-Bmg3.otf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=17]
+size = 12
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=16]
+size = 10
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 3 )
+
+[sub_resource type="Theme" id=18]
+default_font = SubResource( 16 )
+button/constants/height = 12
+
+[node name="Node2D" type="Node2D"]
+pause_mode = 2
+self_modulate = Color( 0, 0, 0, 1 )
+script = ExtResource( 2 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Menu" type="Control" parent="CanvasLayer"]
+margin_left = 61.0
+margin_top = 25.0
+margin_right = 277.0
+margin_bottom = 145.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Buttons" type="Control" parent="CanvasLayer"]
+margin_left = 151.0
+margin_top = 29.0
+margin_right = 205.0
+margin_bottom = 89.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ContinueButton" type="Button" parent="CanvasLayer/Buttons"]
+margin_right = 54.0
+margin_bottom = 20.0
+custom_fonts/font = SubResource( 17 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Buttons/ContinueButton"]
+margin_right = 54.0
+margin_bottom = 20.0
+texture = ExtResource( 1 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/Buttons/ContinueButton"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 52.0
+margin_bottom = 18.0
+theme = SubResource( 18 )
+text = "Continue"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button4" type="Button" parent="CanvasLayer/Buttons"]
+margin_top = 20.0
+margin_right = 54.0
+margin_bottom = 40.0
+rect_pivot_offset = Vector2( 19, -4 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Buttons/Button4"]
+margin_right = 54.0
+margin_bottom = 20.0
+texture = ExtResource( 1 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/Buttons/Button4"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 52.0
+margin_bottom = 18.0
+theme = SubResource( 18 )
+text = "New Game"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button3" type="Button" parent="CanvasLayer/Buttons"]
+margin_top = 40.0
+margin_right = 54.0
+margin_bottom = 60.0
+rect_pivot_offset = Vector2( 19, -4 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Buttons/Button3"]
+margin_right = 54.0
+margin_bottom = 20.0
+texture = ExtResource( 1 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/Buttons/Button3"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 52.0
+margin_bottom = 18.0
+theme = SubResource( 18 )
+text = "Options"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ExitButton" type="Button" parent="CanvasLayer/Buttons"]
+margin_top = 60.0
+margin_right = 54.0
+margin_bottom = 80.0
+rect_pivot_offset = Vector2( 19, -4 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Buttons/ExitButton"]
+margin_right = 54.0
+margin_bottom = 20.0
+texture = ExtResource( 1 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/Buttons/ExitButton"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 52.0
+margin_bottom = 18.0
+theme = SubResource( 18 )
+text = "Exit"
+align = 1
+valign = 1
+autowrap = true
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="button_down" from="CanvasLayer/Buttons/ContinueButton" to="." method="_on_ContinueButton_button_down"]

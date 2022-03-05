@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Entities/Player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Map/TileSets/Decorations.tres" type="TileSet" id=3]
+[ext_resource path="res://Map/TileSets/Wall.tres" type="TileSet" id=4]
+[ext_resource path="res://Map/TileSets/TopWall.tres" type="TileSet" id=5]
+[ext_resource path="res://Map/TileSets/Floor.tres" type="TileSet" id=6]
+
+[node name="Level" type="Node2D"]
+pause_mode = 1
+
+[node name="Floor" type="TileMap" parent="."]
+tile_set = ExtResource( 6 )
+cell_size = Vector2( 16, 16 )
+show_collision = true
+format = 1
+
+[node name="FloorDecoration" type="TileMap" parent="."]
+tile_set = ExtResource( 6 )
+cell_size = Vector2( 16, 16 )
+format = 1
+
+[node name="MainWall" type="TileMap" parent="."]
+tile_set = ExtResource( 4 )
+cell_size = Vector2( 8, 8 )
+occluder_light_mask = 0
+format = 1
+
+[node name="DecorationWall" type="TileMap" parent="."]
+tile_set = ExtResource( 4 )
+cell_size = Vector2( 8, 8 )
+format = 1
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="Player" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 175, 111 )
+
+[node name="Decorations" type="TileMap" parent="YSort"]
+light_mask = 2
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 16, 16 )
+cell_tile_origin = 1
+cell_y_sort = true
+format = 1
+
+[node name="TopWalls" type="TileMap" parent="."]
+tile_set = ExtResource( 5 )
+cell_size = Vector2( 8, 8 )
+cell_tile_origin = 1
+cell_y_sort = true
+format = 1

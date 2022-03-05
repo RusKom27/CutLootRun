@@ -1,0 +1,1649 @@
+[gd_scene load_steps=23 format=2]
+
+[ext_resource path="res://Scenes/Levels/Level2.tscn" type="PackedScene" id=1]
+[ext_resource path="res://UI/Scripts/ChangeLevel.gd" type="Script" id=2]
+[ext_resource path="res://Light/Frames/spot.png" type="Texture" id=7]
+[ext_resource path="res://Shaders/fog.gdshader" type="Shader" id=9]
+[ext_resource path="res://UI/Frames/hp_bar_ui.png" type="Texture" id=10]
+[ext_resource path="res://UI/Frames/empty_bar_ui.png" type="Texture" id=11]
+[ext_resource path="res://UI/Main.tres" type="Theme" id=12]
+[ext_resource path="res://UI/Frames/xp_bar_ui.png" type="Texture" id=13]
+[ext_resource path="res://UI/Frames/xp_ui.png" type="Texture" id=14]
+[ext_resource path="res://UI/Frames/heart_ui.png" type="Texture" id=15]
+[ext_resource path="res://UI/Scripts/healthbar.gd" type="Script" id=16]
+[ext_resource path="res://UI/Scripts/xpbar.gd" type="Script" id=17]
+[ext_resource path="res://UI/Frames/ui_panel.png" type="Texture" id=18]
+[ext_resource path="res://UI/Frames/ui_button.png" type="Texture" id=19]
+[ext_resource path="res://UI/MinecraftRegular-Bmg3.otf" type="DynamicFontData" id=21]
+[ext_resource path="res://UI/Frames/pause_ui.png" type="Texture" id=22]
+[ext_resource path="res://Scripts/Main.gd" type="Script" id=24]
+
+[sub_resource type="ShaderMaterial" id=6]
+render_priority = 1
+shader = ExtResource( 9 )
+shader_param/color = Vector3( 0.884, 0.762, 0.847 )
+shader_param/OCTAVES = 4
+
+[sub_resource type="StyleBoxTexture" id=12]
+texture = ExtResource( 13 )
+region_rect = Rect2( 1, 0, 98, 13 )
+axis_stretch_horizontal = 1
+
+[sub_resource type="StyleBoxTexture" id=11]
+texture = ExtResource( 11 )
+region_rect = Rect2( 1, 0, 96, 13 )
+
+[sub_resource type="StyleBoxTexture" id=10]
+texture = ExtResource( 10 )
+region_rect = Rect2( 1, 0, 98, 13 )
+axis_stretch_horizontal = 1
+
+[sub_resource type="DynamicFont" id=13]
+size = 12
+font_data = ExtResource( 21 )
+
+[node name="Root" type="Node2D"]
+pause_mode = 2
+script = ExtResource( 24 )
+
+[node name="Map" type="Node2D" parent="."]
+
+[node name="Level" parent="Map" instance=ExtResource( 1 )]
+
+[node name="Fog" type="Sprite" parent="."]
+light_mask = 7
+material = SubResource( 6 )
+scale = Vector2( 100, 100 )
+texture = ExtResource( 7 )
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color( 0.458824, 0.341176, 0.298039, 1 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+pause_mode = 2
+
+[node name="GameUI" type="Control" parent="CanvasLayer"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="XPBar" type="ProgressBar" parent="CanvasLayer/GameUI"]
+margin_left = 3.0
+margin_top = 17.0
+margin_right = 97.0
+margin_bottom = 31.0
+grow_horizontal = 0
+theme = ExtResource( 12 )
+custom_styles/fg = SubResource( 12 )
+custom_styles/bg = SubResource( 11 )
+step = 1.0
+value = 100.0
+percent_visible = false
+script = ExtResource( 17 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthBar" type="ProgressBar" parent="CanvasLayer/GameUI"]
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 97.0
+margin_bottom = 17.0
+grow_horizontal = 0
+theme = ExtResource( 12 )
+custom_styles/fg = SubResource( 10 )
+custom_styles/bg = SubResource( 11 )
+step = 1.0
+value = 100.0
+percent_visible = false
+script = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="XPIcon" type="TextureRect" parent="CanvasLayer/GameUI"]
+margin_left = 99.0
+margin_top = 17.0
+margin_right = 112.0
+margin_bottom = 30.0
+texture = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthIcon" type="TextureRect" parent="CanvasLayer/GameUI"]
+margin_left = 99.0
+margin_top = 5.0
+margin_right = 112.0
+margin_bottom = 18.0
+texture = ExtResource( 15 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PauseButton" type="TextureButton" parent="CanvasLayer/GameUI"]
+margin_left = 339.0
+margin_top = 1.0
+margin_right = 349.0
+margin_bottom = 11.0
+texture_normal = ExtResource( 22 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Menu" type="Control" parent="CanvasLayer"]
+margin_left = 61.0
+margin_top = 25.0
+margin_right = 277.0
+margin_bottom = 145.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="NinePatchRect" parent="CanvasLayer/Menu"]
+margin_left = 54.0
+margin_right = 216.0
+margin_bottom = 120.0
+size_flags_horizontal = 5
+size_flags_vertical = 5
+texture = ExtResource( 18 )
+patch_margin_left = 11
+patch_margin_top = 11
+patch_margin_right = 11
+patch_margin_bottom = 11
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Skills" type="Control" parent="CanvasLayer/Menu/Panel"]
+visible = false
+margin_right = 162.0
+margin_bottom = 120.0
+
+[node name="Buttons" type="Control" parent="CanvasLayer/Menu/Panel/Skills"]
+margin_top = 2.0
+margin_right = 40.0
+margin_bottom = 118.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AddHPButton" type="Button" parent="CanvasLayer/Menu/Panel/Skills/Buttons"]
+modulate = Color( 1, 0.396078, 0.396078, 1 )
+margin_left = 10.0
+margin_top = 6.0
+margin_right = 35.0
+margin_bottom = 29.0
+rect_pivot_offset = Vector2( 19, -4 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Panel/Skills/Buttons/AddHPButton"]
+margin_right = 25.0
+margin_bottom = 23.0
+texture = ExtResource( 19 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/Menu/Panel/Skills/Buttons/AddHPButton"]
+margin_left = 3.0
+margin_right = 21.0
+margin_bottom = 23.0
+theme = ExtResource( 12 )
+text = "+HP"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AddDMGButton2" type="Button" parent="CanvasLayer/Menu/Panel/Skills/Buttons"]
+modulate = Color( 0.396078, 1, 0.898039, 1 )
+margin_left = 10.0
+margin_top = 31.0
+margin_right = 35.0
+margin_bottom = 54.0
+rect_pivot_offset = Vector2( 19, -4 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Panel/Skills/Buttons/AddDMGButton2"]
+margin_right = 25.0
+margin_bottom = 23.0
+texture = ExtResource( 19 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/Menu/Panel/Skills/Buttons/AddDMGButton2"]
+margin_right = 25.0
+margin_bottom = 23.0
+theme = ExtResource( 12 )
+text = "+DMG"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AddREGButton3" type="Button" parent="CanvasLayer/Menu/Panel/Skills/Buttons"]
+modulate = Color( 0.32549, 1, 0.494118, 1 )
+margin_left = 10.0
+margin_top = 56.0
+margin_right = 35.0
+margin_bottom = 79.0
+rect_pivot_offset = Vector2( 19, -4 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Panel/Skills/Buttons/AddREGButton3"]
+margin_right = 25.0
+margin_bottom = 23.0
+texture = ExtResource( 19 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/Menu/Panel/Skills/Buttons/AddREGButton3"]
+margin_right = 25.0
+margin_bottom = 23.0
+theme = ExtResource( 12 )
+text = "+REG"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AddMOVButton4" type="Button" parent="CanvasLayer/Menu/Panel/Skills/Buttons"]
+modulate = Color( 0.882353, 1, 0.32549, 1 )
+margin_left = 10.0
+margin_top = 81.0
+margin_right = 35.0
+margin_bottom = 104.0
+rect_pivot_offset = Vector2( 19, -4 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Panel/Skills/Buttons/AddMOVButton4"]
+margin_right = 25.0
+margin_bottom = 23.0
+texture = ExtResource( 19 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/Menu/Panel/Skills/Buttons/AddMOVButton4"]
+margin_right = 25.0
+margin_bottom = 23.0
+theme = ExtResource( 12 )
+text = "+MOV"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Info" type="Control" parent="CanvasLayer/Menu/Panel/Skills"]
+margin_left = 54.0
+margin_top = 2.0
+margin_right = 158.0
+margin_bottom = 118.0
+
+[node name="Health" type="Label" parent="CanvasLayer/Menu/Panel/Skills/Info"]
+margin_top = 10.0
+margin_right = 40.0
+margin_bottom = 24.0
+theme = ExtResource( 12 )
+text = "Health: 100"
+
+[node name="Damage" type="Label" parent="CanvasLayer/Menu/Panel/Skills/Info"]
+margin_top = 35.0
+margin_right = 40.0
+margin_bottom = 49.0
+theme = ExtResource( 12 )
+text = "Damage: 12"
+
+[node name="Regeneration" type="Label" parent="CanvasLayer/Menu/Panel/Skills/Info"]
+margin_top = 61.0
+margin_right = 68.0
+margin_bottom = 75.0
+theme = ExtResource( 12 )
+text = "Regeneration: 3"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Movement" type="Label" parent="CanvasLayer/Menu/Panel/Skills/Info"]
+margin_top = 86.0
+margin_right = 68.0
+margin_bottom = 100.0
+theme = ExtResource( 12 )
+text = "Movement: 20"
+
+[node name="Options" type="Control" parent="CanvasLayer/Menu/Panel"]
+visible = false
+margin_right = 162.0
+margin_bottom = 120.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Volume" type="Control" parent="CanvasLayer/Menu/Panel/Options"]
+margin_right = 162.0
+margin_bottom = 26.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSlider" type="HSlider" parent="CanvasLayer/Menu/Panel/Options/Volume"]
+margin_left = 50.0
+margin_top = 6.0
+margin_right = 158.0
+margin_bottom = 22.0
+value = 34.0
+
+[node name="Label" type="Label" parent="CanvasLayer/Menu/Panel/Options/Volume"]
+margin_left = 10.0
+margin_top = 8.0
+margin_right = 50.0
+margin_bottom = 22.0
+theme = ExtResource( 12 )
+text = "Volume"
+
+[node name="Quality" type="Control" parent="CanvasLayer/Menu/Panel/Options"]
+margin_top = 26.0
+margin_right = 162.0
+margin_bottom = 52.0
+
+[node name="Label" type="Label" parent="CanvasLayer/Menu/Panel/Options/Quality"]
+margin_left = 10.0
+margin_top = 8.0
+margin_right = 50.0
+margin_bottom = 22.0
+theme = ExtResource( 12 )
+text = "Quality"
+
+[node name="HSlider" type="HSlider" parent="CanvasLayer/Menu/Panel/Options/Quality"]
+margin_left = 50.0
+margin_top = 6.0
+margin_right = 126.0
+margin_bottom = 22.0
+value = 100.0
+
+[node name="Label2" type="Label" parent="CanvasLayer/Menu/Panel/Options/Quality"]
+margin_left = 132.0
+margin_top = 8.0
+margin_right = 172.0
+margin_bottom = 22.0
+theme = ExtResource( 12 )
+text = "High"
+
+[node name="Music" type="Control" parent="CanvasLayer/Menu/Panel/Options"]
+margin_top = 52.0
+margin_right = 162.0
+margin_bottom = 78.0
+
+[node name="Label" type="Label" parent="CanvasLayer/Menu/Panel/Options/Music"]
+margin_left = 10.0
+margin_top = 8.0
+margin_right = 50.0
+margin_bottom = 22.0
+theme = ExtResource( 12 )
+text = "Music"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CheckBox" type="CheckBox" parent="CanvasLayer/Menu/Panel/Options/Music"]
+margin_left = 40.0
+margin_right = 64.0
+margin_bottom = 24.0
+
+[node name="Fog" type="Control" parent="CanvasLayer/Menu/Panel/Options"]
+margin_top = 76.0
+margin_right = 162.0
+margin_bottom = 102.0
+
+[node name="Label" type="Label" parent="CanvasLayer/Menu/Panel/Options/Fog"]
+margin_left = 10.0
+margin_top = 8.0
+margin_right = 50.0
+margin_bottom = 22.0
+theme = ExtResource( 12 )
+text = "Fog"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CheckBox" type="CheckBox" parent="CanvasLayer/Menu/Panel/Options/Fog"]
+margin_left = 40.0
+margin_right = 64.0
+margin_bottom = 24.0
+
+[node name="Inventory" type="Control" parent="CanvasLayer/Menu/Panel"]
+visible = false
+margin_right = 162.0
+margin_bottom = 120.0
+
+[node name="Cell1" type="Button" parent="CanvasLayer/Menu/Panel/Inventory"]
+modulate = Color( 0.709804, 0.709804, 0.709804, 1 )
+margin_left = 14.0
+margin_top = 7.0
+margin_right = 39.0
+margin_bottom = 32.0
+rect_pivot_offset = Vector2( 19, -4 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Panel/Inventory/Cell1"]
+margin_right = 25.0
+margin_bottom = 25.0
+texture = ExtResource( 19 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell2" type="Button" parent="CanvasLayer/Menu/Panel/Inventory"]
+modulate = Color( 0.709804, 0.709804, 0.709804, 1 )
+margin_left = 41.0
+margin_top = 7.0
+margin_right = 66.0
+margin_bottom = 32.0
+rect_pivot_offset = Vector2( 19, -4 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Panel/Inventory/Cell2"]
+margin_right = 25.0
+margin_bottom = 25.0
+texture = ExtResource( 19 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell3" type="Button" parent="CanvasLayer/Menu/Panel/Inventory"]
+modulate = Color( 0.709804, 0.709804, 0.709804, 1 )
+margin_left = 68.0
+margin_top = 7.0
+margin_right = 93.0
+margin_bottom = 32.0
+rect_pivot_offset = Vector2( 19, -4 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Panel/Inventory/Cell3"]
+margin_right = 25.0
+margin_bottom = 25.0
+texture = ExtResource( 19 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell4" type="Button" parent="CanvasLayer/Menu/Panel/Inventory"]
+modulate = Color( 0.709804, 0.709804, 0.709804, 1 )
+margin_left = 95.0
+margin_top = 7.0
+margin_right = 120.0
+margin_bottom = 32.0
+rect_pivot_offset = Vector2( 19, -4 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Panel/Inventory/Cell4"]
+margin_right = 25.0
+margin_bottom = 25.0
+texture = ExtResource( 19 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell5" type="Button" parent="CanvasLayer/Menu/Panel/Inventory"]
+modulate = Color( 0.709804, 0.709804, 0.709804, 1 )
+margin_left = 122.0
+margin_top = 7.0
+margin_right = 147.0
+margin_bottom = 32.0
+rect_pivot_offset = Vector2( 19, -4 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Panel/Inventory/Cell5"]
+margin_right = 25.0
+margin_bottom = 25.0
+texture = ExtResource( 19 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell6" type="Button" parent="CanvasLayer/Menu/Panel/Inventory"]
+modulate = Color( 0.709804, 0.709804, 0.709804, 1 )
+margin_left = 14.0
+margin_top = 34.0
+margin_right = 39.0
+margin_bottom = 59.0
+rect_pivot_offset = Vector2( 19, -4 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Panel/Inventory/Cell6"]
+margin_right = 25.0
+margin_bottom = 25.0
+texture = ExtResource( 19 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell7" type="Button" parent="CanvasLayer/Menu/Panel/Inventory"]
+modulate = Color( 0.709804, 0.709804, 0.709804, 1 )
+margin_left = 41.0
+margin_top = 34.0
+margin_right = 66.0
+margin_bottom = 59.0
+rect_pivot_offset = Vector2( 19, -4 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Panel/Inventory/Cell7"]
+margin_right = 25.0
+margin_bottom = 25.0
+texture = ExtResource( 19 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell8" type="Button" parent="CanvasLayer/Menu/Panel/Inventory"]
+modulate = Color( 0.709804, 0.709804, 0.709804, 1 )
+margin_left = 68.0
+margin_top = 34.0
+margin_right = 93.0
+margin_bottom = 59.0
+rect_pivot_offset = Vector2( 19, -4 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Panel/Inventory/Cell8"]
+margin_right = 25.0
+margin_bottom = 25.0
+texture = ExtResource( 19 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell9" type="Button" parent="CanvasLayer/Menu/Panel/Inventory"]
+modulate = Color( 0.709804, 0.709804, 0.709804, 1 )
+margin_left = 95.0
+margin_top = 34.0
+margin_right = 120.0
+margin_bottom = 59.0
+rect_pivot_offset = Vector2( 19, -4 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Panel/Inventory/Cell9"]
+margin_right = 25.0
+margin_bottom = 25.0
+texture = ExtResource( 19 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell10" type="Button" parent="CanvasLayer/Menu/Panel/Inventory"]
+modulate = Color( 0.709804, 0.709804, 0.709804, 1 )
+margin_left = 122.0
+margin_top = 34.0
+margin_right = 147.0
+margin_bottom = 59.0
+rect_pivot_offset = Vector2( 19, -4 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Panel/Inventory/Cell10"]
+margin_right = 25.0
+margin_bottom = 25.0
+texture = ExtResource( 19 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell11" type="Button" parent="CanvasLayer/Menu/Panel/Inventory"]
+modulate = Color( 0.709804, 0.709804, 0.709804, 1 )
+margin_left = 14.0
+margin_top = 61.0
+margin_right = 39.0
+margin_bottom = 86.0
+rect_pivot_offset = Vector2( 19, -4 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Panel/Inventory/Cell11"]
+margin_right = 25.0
+margin_bottom = 25.0
+texture = ExtResource( 19 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell12" type="Button" parent="CanvasLayer/Menu/Panel/Inventory"]
+modulate = Color( 0.709804, 0.709804, 0.709804, 1 )
+margin_left = 41.0
+margin_top = 61.0
+margin_right = 66.0
+margin_bottom = 86.0
+rect_pivot_offset = Vector2( 19, -4 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Panel/Inventory/Cell12"]
+margin_right = 25.0
+margin_bottom = 25.0
+texture = ExtResource( 19 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell13" type="Button" parent="CanvasLayer/Menu/Panel/Inventory"]
+modulate = Color( 0.709804, 0.709804, 0.709804, 1 )
+margin_left = 68.0
+margin_top = 61.0
+margin_right = 93.0
+margin_bottom = 86.0
+rect_pivot_offset = Vector2( 19, -4 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Panel/Inventory/Cell13"]
+margin_right = 25.0
+margin_bottom = 25.0
+texture = ExtResource( 19 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell14" type="Button" parent="CanvasLayer/Menu/Panel/Inventory"]
+modulate = Color( 0.709804, 0.709804, 0.709804, 1 )
+margin_left = 95.0
+margin_top = 61.0
+margin_right = 120.0
+margin_bottom = 86.0
+rect_pivot_offset = Vector2( 19, -4 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Panel/Inventory/Cell14"]
+margin_right = 25.0
+margin_bottom = 25.0
+texture = ExtResource( 19 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell15" type="Button" parent="CanvasLayer/Menu/Panel/Inventory"]
+modulate = Color( 0.709804, 0.709804, 0.709804, 1 )
+margin_left = 122.0
+margin_top = 61.0
+margin_right = 147.0
+margin_bottom = 86.0
+rect_pivot_offset = Vector2( 19, -4 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Panel/Inventory/Cell15"]
+margin_right = 25.0
+margin_bottom = 25.0
+texture = ExtResource( 19 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell16" type="Button" parent="CanvasLayer/Menu/Panel/Inventory"]
+modulate = Color( 0.709804, 0.709804, 0.709804, 1 )
+margin_left = 14.0
+margin_top = 88.0
+margin_right = 39.0
+margin_bottom = 113.0
+rect_pivot_offset = Vector2( 19, -4 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Panel/Inventory/Cell16"]
+margin_right = 25.0
+margin_bottom = 25.0
+texture = ExtResource( 19 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell17" type="Button" parent="CanvasLayer/Menu/Panel/Inventory"]
+modulate = Color( 0.709804, 0.709804, 0.709804, 1 )
+margin_left = 41.0
+margin_top = 88.0
+margin_right = 66.0
+margin_bottom = 113.0
+rect_pivot_offset = Vector2( 19, -4 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Panel/Inventory/Cell17"]
+margin_right = 25.0
+margin_bottom = 25.0
+texture = ExtResource( 19 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell18" type="Button" parent="CanvasLayer/Menu/Panel/Inventory"]
+modulate = Color( 0.709804, 0.709804, 0.709804, 1 )
+margin_left = 68.0
+margin_top = 88.0
+margin_right = 93.0
+margin_bottom = 113.0
+rect_pivot_offset = Vector2( 19, -4 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Panel/Inventory/Cell18"]
+margin_right = 25.0
+margin_bottom = 25.0
+texture = ExtResource( 19 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell19" type="Button" parent="CanvasLayer/Menu/Panel/Inventory"]
+modulate = Color( 0.709804, 0.709804, 0.709804, 1 )
+margin_left = 95.0
+margin_top = 88.0
+margin_right = 120.0
+margin_bottom = 113.0
+rect_pivot_offset = Vector2( 19, -4 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Panel/Inventory/Cell19"]
+margin_right = 25.0
+margin_bottom = 25.0
+texture = ExtResource( 19 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell20" type="Button" parent="CanvasLayer/Menu/Panel/Inventory"]
+modulate = Color( 0.709804, 0.709804, 0.709804, 1 )
+margin_left = 122.0
+margin_top = 88.0
+margin_right = 147.0
+margin_bottom = 113.0
+rect_pivot_offset = Vector2( 19, -4 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Panel/Inventory/Cell20"]
+margin_right = 25.0
+margin_bottom = 25.0
+texture = ExtResource( 19 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Levels" type="Control" parent="CanvasLayer/Menu/Panel"]
+margin_right = 162.0
+margin_bottom = 120.0
+rect_pivot_offset = Vector2( -88, 14 )
+script = ExtResource( 2 )
+
+[node name="Cell1" type="Button" parent="CanvasLayer/Menu/Panel/Levels"]
+margin_left = 14.0
+margin_top = 7.0
+margin_right = 39.0
+margin_bottom = 32.0
+rect_pivot_offset = Vector2( 19, -4 )
+flat = true
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Panel/Levels/Cell1"]
+margin_right = 25.0
+margin_bottom = 25.0
+texture = ExtResource( 19 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/Menu/Panel/Levels/Cell1"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 23.0
+margin_bottom = 23.0
+theme = ExtResource( 12 )
+text = "1"
+align = 1
+valign = 1
+
+[node name="Cell2" type="Button" parent="CanvasLayer/Menu/Panel/Levels"]
+margin_left = 41.0
+margin_top = 7.0
+margin_right = 66.0
+margin_bottom = 32.0
+rect_pivot_offset = Vector2( 19, -4 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Panel/Levels/Cell2"]
+margin_right = 25.0
+margin_bottom = 25.0
+texture = ExtResource( 19 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/Menu/Panel/Levels/Cell2"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 23.0
+margin_bottom = 23.0
+theme = ExtResource( 12 )
+text = "2"
+align = 1
+valign = 1
+
+[node name="Cell3" type="Button" parent="CanvasLayer/Menu/Panel/Levels"]
+modulate = Color( 0.709804, 0.709804, 0.709804, 1 )
+margin_left = 68.0
+margin_top = 7.0
+margin_right = 93.0
+margin_bottom = 32.0
+rect_pivot_offset = Vector2( 19, -4 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Panel/Levels/Cell3"]
+margin_right = 25.0
+margin_bottom = 25.0
+texture = ExtResource( 19 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/Menu/Panel/Levels/Cell3"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 23.0
+margin_bottom = 23.0
+theme = ExtResource( 12 )
+text = "3"
+align = 1
+valign = 1
+
+[node name="Cell4" type="Button" parent="CanvasLayer/Menu/Panel/Levels"]
+modulate = Color( 0.709804, 0.709804, 0.709804, 1 )
+margin_left = 95.0
+margin_top = 7.0
+margin_right = 120.0
+margin_bottom = 32.0
+rect_pivot_offset = Vector2( 19, -4 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Panel/Levels/Cell4"]
+margin_right = 25.0
+margin_bottom = 25.0
+texture = ExtResource( 19 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/Menu/Panel/Levels/Cell4"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 23.0
+margin_bottom = 23.0
+theme = ExtResource( 12 )
+text = "4"
+align = 1
+valign = 1
+
+[node name="Cell5" type="Button" parent="CanvasLayer/Menu/Panel/Levels"]
+modulate = Color( 0.709804, 0.709804, 0.709804, 1 )
+margin_left = 122.0
+margin_top = 7.0
+margin_right = 147.0
+margin_bottom = 32.0
+rect_pivot_offset = Vector2( 19, -4 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Panel/Levels/Cell5"]
+margin_right = 25.0
+margin_bottom = 25.0
+texture = ExtResource( 19 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/Menu/Panel/Levels/Cell5"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 23.0
+margin_bottom = 23.0
+theme = ExtResource( 12 )
+text = "5"
+align = 1
+valign = 1
+
+[node name="Cell6" type="Button" parent="CanvasLayer/Menu/Panel/Levels"]
+modulate = Color( 0.709804, 0.709804, 0.709804, 1 )
+margin_left = 14.0
+margin_top = 34.0
+margin_right = 39.0
+margin_bottom = 59.0
+rect_pivot_offset = Vector2( 19, -4 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Panel/Levels/Cell6"]
+margin_right = 25.0
+margin_bottom = 25.0
+texture = ExtResource( 19 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/Menu/Panel/Levels/Cell6"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 23.0
+margin_bottom = 23.0
+theme = ExtResource( 12 )
+text = "6"
+align = 1
+valign = 1
+
+[node name="Cell7" type="Button" parent="CanvasLayer/Menu/Panel/Levels"]
+modulate = Color( 0.709804, 0.709804, 0.709804, 1 )
+margin_left = 41.0
+margin_top = 34.0
+margin_right = 66.0
+margin_bottom = 59.0
+rect_pivot_offset = Vector2( 19, -4 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Panel/Levels/Cell7"]
+margin_right = 25.0
+margin_bottom = 25.0
+texture = ExtResource( 19 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/Menu/Panel/Levels/Cell7"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 23.0
+margin_bottom = 23.0
+theme = ExtResource( 12 )
+text = "7"
+align = 1
+valign = 1
+
+[node name="Cell8" type="Button" parent="CanvasLayer/Menu/Panel/Levels"]
+modulate = Color( 0.709804, 0.709804, 0.709804, 1 )
+margin_left = 68.0
+margin_top = 34.0
+margin_right = 93.0
+margin_bottom = 59.0
+rect_pivot_offset = Vector2( 19, -4 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Panel/Levels/Cell8"]
+margin_right = 25.0
+margin_bottom = 25.0
+texture = ExtResource( 19 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/Menu/Panel/Levels/Cell8"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 23.0
+margin_bottom = 23.0
+theme = ExtResource( 12 )
+text = "8"
+align = 1
+valign = 1
+
+[node name="Cell9" type="Button" parent="CanvasLayer/Menu/Panel/Levels"]
+modulate = Color( 0.709804, 0.709804, 0.709804, 1 )
+margin_left = 95.0
+margin_top = 34.0
+margin_right = 120.0
+margin_bottom = 59.0
+rect_pivot_offset = Vector2( 19, -4 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Panel/Levels/Cell9"]
+margin_right = 25.0
+margin_bottom = 25.0
+texture = ExtResource( 19 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/Menu/Panel/Levels/Cell9"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 23.0
+margin_bottom = 23.0
+theme = ExtResource( 12 )
+text = "9"
+align = 1
+valign = 1
+
+[node name="Cell10" type="Button" parent="CanvasLayer/Menu/Panel/Levels"]
+modulate = Color( 0.709804, 0.709804, 0.709804, 1 )
+margin_left = 122.0
+margin_top = 34.0
+margin_right = 147.0
+margin_bottom = 59.0
+rect_pivot_offset = Vector2( 19, -4 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Panel/Levels/Cell10"]
+margin_right = 25.0
+margin_bottom = 25.0
+texture = ExtResource( 19 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/Menu/Panel/Levels/Cell10"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 23.0
+margin_bottom = 23.0
+theme = ExtResource( 12 )
+text = "10"
+align = 1
+valign = 1
+
+[node name="Cell11" type="Button" parent="CanvasLayer/Menu/Panel/Levels"]
+modulate = Color( 0.709804, 0.709804, 0.709804, 1 )
+margin_left = 14.0
+margin_top = 61.0
+margin_right = 39.0
+margin_bottom = 86.0
+rect_pivot_offset = Vector2( 19, -4 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Panel/Levels/Cell11"]
+margin_right = 25.0
+margin_bottom = 25.0
+texture = ExtResource( 19 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/Menu/Panel/Levels/Cell11"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 23.0
+margin_bottom = 23.0
+theme = ExtResource( 12 )
+text = "11"
+align = 1
+valign = 1
+
+[node name="Cell12" type="Button" parent="CanvasLayer/Menu/Panel/Levels"]
+modulate = Color( 0.709804, 0.709804, 0.709804, 1 )
+margin_left = 41.0
+margin_top = 61.0
+margin_right = 66.0
+margin_bottom = 86.0
+rect_pivot_offset = Vector2( 19, -4 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Panel/Levels/Cell12"]
+margin_right = 25.0
+margin_bottom = 25.0
+texture = ExtResource( 19 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/Menu/Panel/Levels/Cell12"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 23.0
+margin_bottom = 23.0
+theme = ExtResource( 12 )
+text = "12"
+align = 1
+valign = 1
+
+[node name="Home" type="Button" parent="CanvasLayer/Menu/Panel/Levels"]
+margin_left = 113.0
+margin_top = 92.0
+margin_right = 146.0
+margin_bottom = 117.0
+rect_pivot_offset = Vector2( 19, -4 )
+flat = true
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Panel/Levels/Home"]
+margin_right = 33.0
+margin_bottom = 25.0
+texture = ExtResource( 19 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/Menu/Panel/Levels/Home"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 31.0
+margin_bottom = 23.0
+theme = ExtResource( 12 )
+text = "Home"
+align = 1
+valign = 1
+
+[node name="Buttons" type="Control" parent="CanvasLayer/Menu"]
+margin_right = 54.0
+margin_bottom = 120.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ContinueButton" type="Button" parent="CanvasLayer/Menu/Buttons"]
+margin_right = 54.0
+margin_bottom = 20.0
+custom_fonts/font = SubResource( 13 )
+text = "Продолжить"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Buttons/ContinueButton"]
+margin_right = 54.0
+margin_bottom = 20.0
+texture = ExtResource( 19 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/Menu/Buttons/ContinueButton"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 52.0
+margin_bottom = 18.0
+theme = ExtResource( 12 )
+text = "Continue"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button2" type="Button" parent="CanvasLayer/Menu/Buttons"]
+margin_top = 40.0
+margin_right = 54.0
+margin_bottom = 60.0
+rect_pivot_offset = Vector2( 19, -4 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Buttons/Button2"]
+margin_right = 54.0
+margin_bottom = 20.0
+texture = ExtResource( 19 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/Menu/Buttons/Button2"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 52.0
+margin_bottom = 18.0
+theme = ExtResource( 12 )
+text = "Skills"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button3" type="Button" parent="CanvasLayer/Menu/Buttons"]
+margin_top = 60.0
+margin_right = 54.0
+margin_bottom = 80.0
+rect_pivot_offset = Vector2( 19, -4 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Buttons/Button3"]
+margin_right = 54.0
+margin_bottom = 20.0
+texture = ExtResource( 19 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/Menu/Buttons/Button3"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 52.0
+margin_bottom = 18.0
+theme = ExtResource( 12 )
+text = "Options"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button4" type="Button" parent="CanvasLayer/Menu/Buttons"]
+margin_top = 80.0
+margin_right = 54.0
+margin_bottom = 100.0
+rect_pivot_offset = Vector2( 37, -30 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Buttons/Button4"]
+margin_right = 54.0
+margin_bottom = 20.0
+texture = ExtResource( 19 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/Menu/Buttons/Button4"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 52.0
+margin_bottom = 18.0
+theme = ExtResource( 12 )
+text = "Inventory"
+align = 1
+valign = 1
+autowrap = true
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button5" type="Button" parent="CanvasLayer/Menu/Buttons"]
+margin_top = 20.0
+margin_right = 54.0
+margin_bottom = 40.0
+rect_pivot_offset = Vector2( 19, -4 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Buttons/Button5"]
+margin_right = 54.0
+margin_bottom = 20.0
+texture = ExtResource( 19 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/Menu/Buttons/Button5"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 52.0
+margin_bottom = 18.0
+theme = ExtResource( 12 )
+text = "Save"
+align = 1
+valign = 1
+autowrap = true
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ExitButton" type="Button" parent="CanvasLayer/Menu/Buttons"]
+margin_top = 100.0
+margin_right = 54.0
+margin_bottom = 120.0
+rect_pivot_offset = Vector2( 19, -4 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Buttons/ExitButton"]
+margin_right = 54.0
+margin_bottom = 20.0
+texture = ExtResource( 19 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/Menu/Buttons/ExitButton"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 52.0
+margin_bottom = 18.0
+theme = ExtResource( 12 )
+text = "Exit"
+align = 1
+valign = 1
+autowrap = true
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="button_down" from="CanvasLayer/GameUI/PauseButton" to="." method="_on_PauseButton_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Panel/Skills/Buttons/AddHPButton" to="CanvasLayer/Menu/Panel/Skills/Buttons/AddHPButton" method="_on_Button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Panel/Skills/Buttons/AddDMGButton2" to="CanvasLayer/Menu/Panel/Skills/Buttons/AddDMGButton2" method="_on_Button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Panel/Skills/Buttons/AddREGButton3" to="CanvasLayer/Menu/Panel/Skills/Buttons/AddREGButton3" method="_on_Button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Panel/Skills/Buttons/AddMOVButton4" to="CanvasLayer/Menu/Panel/Skills/Buttons/AddMOVButton4" method="_on_Button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Panel/Inventory/Cell1" to="CanvasLayer/Menu/Panel/Inventory/Cell1" method="_on_Button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Panel/Inventory/Cell2" to="CanvasLayer/Menu/Panel/Inventory/Cell2" method="_on_Button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Panel/Inventory/Cell3" to="CanvasLayer/Menu/Panel/Inventory/Cell3" method="_on_Button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Panel/Inventory/Cell4" to="CanvasLayer/Menu/Panel/Inventory/Cell4" method="_on_Button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Panel/Inventory/Cell5" to="CanvasLayer/Menu/Panel/Inventory/Cell5" method="_on_Button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Panel/Inventory/Cell6" to="CanvasLayer/Menu/Panel/Inventory/Cell6" method="_on_Button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Panel/Inventory/Cell7" to="CanvasLayer/Menu/Panel/Inventory/Cell7" method="_on_Button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Panel/Inventory/Cell8" to="CanvasLayer/Menu/Panel/Inventory/Cell8" method="_on_Button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Panel/Inventory/Cell9" to="CanvasLayer/Menu/Panel/Inventory/Cell9" method="_on_Button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Panel/Inventory/Cell10" to="CanvasLayer/Menu/Panel/Inventory/Cell10" method="_on_Button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Panel/Inventory/Cell11" to="CanvasLayer/Menu/Panel/Inventory/Cell11" method="_on_Button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Panel/Inventory/Cell12" to="CanvasLayer/Menu/Panel/Inventory/Cell12" method="_on_Button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Panel/Inventory/Cell13" to="CanvasLayer/Menu/Panel/Inventory/Cell13" method="_on_Button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Panel/Inventory/Cell14" to="CanvasLayer/Menu/Panel/Inventory/Cell14" method="_on_Button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Panel/Inventory/Cell15" to="CanvasLayer/Menu/Panel/Inventory/Cell15" method="_on_Button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Panel/Inventory/Cell16" to="CanvasLayer/Menu/Panel/Inventory/Cell16" method="_on_Button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Panel/Inventory/Cell17" to="CanvasLayer/Menu/Panel/Inventory/Cell17" method="_on_Button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Panel/Inventory/Cell18" to="CanvasLayer/Menu/Panel/Inventory/Cell18" method="_on_Button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Panel/Inventory/Cell19" to="CanvasLayer/Menu/Panel/Inventory/Cell19" method="_on_Button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Panel/Inventory/Cell20" to="CanvasLayer/Menu/Panel/Inventory/Cell20" method="_on_Button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Panel/Levels/Cell1" to="CanvasLayer/Menu/Panel/Levels" method="_on_Cell1_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Panel/Levels/Cell2" to="CanvasLayer/Menu/Panel/Levels" method="_on_Cell2_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Panel/Levels/Cell3" to="CanvasLayer/Menu/Panel/Levels/Cell3" method="_on_Button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Panel/Levels/Cell4" to="CanvasLayer/Menu/Panel/Levels/Cell4" method="_on_Button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Panel/Levels/Cell5" to="CanvasLayer/Menu/Panel/Levels/Cell5" method="_on_Button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Panel/Levels/Cell6" to="CanvasLayer/Menu/Panel/Levels/Cell6" method="_on_Button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Panel/Levels/Cell7" to="CanvasLayer/Menu/Panel/Levels/Cell7" method="_on_Button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Panel/Levels/Cell8" to="CanvasLayer/Menu/Panel/Levels/Cell8" method="_on_Button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Panel/Levels/Cell9" to="CanvasLayer/Menu/Panel/Levels/Cell9" method="_on_Button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Panel/Levels/Cell10" to="CanvasLayer/Menu/Panel/Levels/Cell10" method="_on_Button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Panel/Levels/Cell11" to="CanvasLayer/Menu/Panel/Levels/Cell11" method="_on_Button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Panel/Levels/Cell12" to="CanvasLayer/Menu/Panel/Levels/Cell12" method="_on_Button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Panel/Levels/Home" to="CanvasLayer/Menu/Panel/Levels" method="_on_Home_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Buttons/ContinueButton" to="." method="_on_ContinueButton_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Buttons/Button2" to="CanvasLayer/Menu/Buttons/Button2" method="_on_Button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Buttons/Button3" to="CanvasLayer/Menu/Buttons/Button3" method="_on_Button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Buttons/Button4" to="CanvasLayer/Menu/Buttons/Button4" method="_on_Button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Buttons/Button5" to="CanvasLayer/Menu/Buttons/Button5" method="_on_Button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Buttons/ExitButton" to="." method="_on_ExitButton_button_down"]
