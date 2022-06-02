@@ -70,6 +70,7 @@ __meta__ = {
 }
 
 [node name="XPBar" type="ProgressBar" parent="CanvasLayer/GameUI"]
+modulate = Color( 0.733333, 0.705882, 0.25098, 1 )
 margin_left = 3.0
 margin_top = 17.0
 margin_right = 97.0
@@ -82,11 +83,9 @@ step = 1.0
 value = 100.0
 percent_visible = false
 script = ExtResource( 17 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="HealthBar" type="ProgressBar" parent="CanvasLayer/GameUI"]
+modulate = Color( 0.737255, 0.376471, 0.376471, 1 )
 margin_left = 3.0
 margin_top = 3.0
 margin_right = 97.0
@@ -104,6 +103,7 @@ __meta__ = {
 }
 
 [node name="XPIcon" type="TextureRect" parent="CanvasLayer/GameUI"]
+modulate = Color( 0.733333, 0.705882, 0.25098, 1 )
 margin_left = 99.0
 margin_top = 17.0
 margin_right = 112.0
@@ -114,6 +114,7 @@ __meta__ = {
 }
 
 [node name="HealthIcon" type="TextureRect" parent="CanvasLayer/GameUI"]
+modulate = Color( 0.737255, 0.376471, 0.376471, 1 )
 margin_left = 99.0
 margin_top = 5.0
 margin_right = 112.0
@@ -135,13 +136,11 @@ __meta__ = {
 }
 
 [node name="Menu" type="Control" parent="CanvasLayer"]
+modulate = Color( 0.905882, 0.905882, 0.905882, 1 )
 margin_left = 61.0
 margin_top = 25.0
 margin_right = 277.0
 margin_bottom = 145.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Panel" type="NinePatchRect" parent="CanvasLayer/Menu"]
 margin_left = 54.0
@@ -159,7 +158,6 @@ __meta__ = {
 }
 
 [node name="Skills" type="Control" parent="CanvasLayer/Menu/Panel"]
-visible = false
 margin_right = 162.0
 margin_bottom = 120.0
 
@@ -939,6 +937,7 @@ __meta__ = {
 }
 
 [node name="Levels" type="Control" parent="CanvasLayer/Menu/Panel"]
+visible = false
 margin_right = 162.0
 margin_bottom = 120.0
 rect_pivot_offset = Vector2( -88, 14 )
@@ -1420,7 +1419,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button2" type="Button" parent="CanvasLayer/Menu/Buttons"]
+[node name="SkillSButton" type="Button" parent="CanvasLayer/Menu/Buttons"]
 margin_top = 40.0
 margin_right = 54.0
 margin_bottom = 60.0
@@ -1430,7 +1429,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Buttons/Button2"]
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Buttons/SkillSButton"]
 margin_right = 54.0
 margin_bottom = 20.0
 texture = ExtResource( 19 )
@@ -1442,7 +1441,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="CanvasLayer/Menu/Buttons/Button2"]
+[node name="Label" type="Label" parent="CanvasLayer/Menu/Buttons/SkillSButton"]
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 52.0
@@ -1456,7 +1455,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button3" type="Button" parent="CanvasLayer/Menu/Buttons"]
+[node name="OptionsButton" type="Button" parent="CanvasLayer/Menu/Buttons"]
 margin_top = 60.0
 margin_right = 54.0
 margin_bottom = 80.0
@@ -1466,7 +1465,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Buttons/Button3"]
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Buttons/OptionsButton"]
 margin_right = 54.0
 margin_bottom = 20.0
 texture = ExtResource( 19 )
@@ -1478,7 +1477,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="CanvasLayer/Menu/Buttons/Button3"]
+[node name="Label" type="Label" parent="CanvasLayer/Menu/Buttons/OptionsButton"]
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 52.0
@@ -1492,7 +1491,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button4" type="Button" parent="CanvasLayer/Menu/Buttons"]
+[node name="InventoryButton" type="Button" parent="CanvasLayer/Menu/Buttons"]
 margin_top = 80.0
 margin_right = 54.0
 margin_bottom = 100.0
@@ -1502,7 +1501,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Buttons/Button4"]
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Buttons/InventoryButton"]
 margin_right = 54.0
 margin_bottom = 20.0
 texture = ExtResource( 19 )
@@ -1514,7 +1513,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="CanvasLayer/Menu/Buttons/Button4"]
+[node name="Label" type="Label" parent="CanvasLayer/Menu/Buttons/InventoryButton"]
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 52.0
@@ -1529,7 +1528,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button5" type="Button" parent="CanvasLayer/Menu/Buttons"]
+[node name="SaveButton" type="Button" parent="CanvasLayer/Menu/Buttons"]
 margin_top = 20.0
 margin_right = 54.0
 margin_bottom = 40.0
@@ -1539,7 +1538,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Buttons/Button5"]
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Buttons/SaveButton"]
 margin_right = 54.0
 margin_bottom = 20.0
 texture = ExtResource( 19 )
@@ -1551,7 +1550,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="CanvasLayer/Menu/Buttons/Button5"]
+[node name="Label" type="Label" parent="CanvasLayer/Menu/Buttons/SaveButton"]
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 52.0
@@ -1562,9 +1561,6 @@ align = 1
 valign = 1
 autowrap = true
 clip_text = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ExitButton" type="Button" parent="CanvasLayer/Menu/Buttons"]
 margin_top = 100.0
@@ -1642,8 +1638,8 @@ __meta__ = {
 [connection signal="button_down" from="CanvasLayer/Menu/Panel/Levels/Cell12" to="CanvasLayer/Menu/Panel/Levels/Cell12" method="_on_Button_button_down"]
 [connection signal="button_down" from="CanvasLayer/Menu/Panel/Levels/Home" to="CanvasLayer/Menu/Panel/Levels" method="_on_Home_button_down"]
 [connection signal="button_down" from="CanvasLayer/Menu/Buttons/ContinueButton" to="." method="_on_ContinueButton_button_down"]
-[connection signal="button_down" from="CanvasLayer/Menu/Buttons/Button2" to="CanvasLayer/Menu/Buttons/Button2" method="_on_Button_button_down"]
-[connection signal="button_down" from="CanvasLayer/Menu/Buttons/Button3" to="CanvasLayer/Menu/Buttons/Button3" method="_on_Button_button_down"]
-[connection signal="button_down" from="CanvasLayer/Menu/Buttons/Button4" to="CanvasLayer/Menu/Buttons/Button4" method="_on_Button_button_down"]
-[connection signal="button_down" from="CanvasLayer/Menu/Buttons/Button5" to="CanvasLayer/Menu/Buttons/Button5" method="_on_Button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Buttons/SkillSButton" to="." method="_on_SkillSButton_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Buttons/OptionsButton" to="." method="_on_OptionsButton_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Buttons/InventoryButton" to="." method="_on_InventoryButton_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Buttons/SaveButton" to="." method="_on_SaveButton_button_down"]
 [connection signal="button_down" from="CanvasLayer/Menu/Buttons/ExitButton" to="." method="_on_ExitButton_button_down"]
