@@ -1,7 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Entities/Enemies/Goblin/Goblin_Animation.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Entities/Enemies/Goblin/goblin.gd" type="Script" id=2]
+[ext_resource path="res://UI/Frames/empty_bar_ui.png" type="Texture" id=3]
+[ext_resource path="res://UI/Frames/hp_bar_ui.png" type="Texture" id=4]
+[ext_resource path="res://UI/Main.tres" type="Theme" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10, 4 )
@@ -11,7 +14,7 @@ polygon = PoolVector2Array( 0, 0, -5, 0, -3, 4, 3, 4, 5, 0 )
 
 [sub_resource type="Animation" id=3]
 resource_name = "get_hit"
-length = 0.5
+length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:modulate")
 tracks/0/interp = 1
@@ -19,11 +22,20 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
-"transitions": PoolRealArray( -2, 1, -2, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, -2, 1, -2, 1, 1, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 0.588235, 0.588235, 0.588235, 1 ), Color( 1, 1, 1, 1 ), Color( 0.588235, 0.588235, 0.588235, 1 ), Color( 1, 1, 1, 1 ), Color( 0.588235, 0.588235, 0.588235, 1 ) ]
+"values": [ Color( 0.588235, 0.588235, 0.588235, 1 ), Color( 1, 1, 1, 1 ), Color( 0.588235, 0.588235, 0.588235, 1 ), Color( 1, 1, 1, 1 ), Color( 0.588235, 0.588235, 0.588235, 1 ), Color( 1, 1, 1, 1 ), Color( 0.588235, 0.588235, 0.588235, 1 ) ]
 }
+
+[sub_resource type="StyleBoxTexture" id=4]
+texture = ExtResource( 4 )
+region_rect = Rect2( 1, 0, 98, 13 )
+axis_stretch_horizontal = 1
+
+[sub_resource type="StyleBoxTexture" id=5]
+texture = ExtResource( 3 )
+region_rect = Rect2( 1, 0, 96, 13 )
 
 [node name="Goblin" type="KinematicBody2D"]
 script = ExtResource( 2 )
@@ -32,8 +44,8 @@ script = ExtResource( 2 )
 light_mask = 2
 position = Vector2( 0, -20.991 )
 frames = ExtResource( 1 )
-animation = "birth"
-frame = 3
+animation = "idle"
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -54,6 +66,28 @@ wait_time = 0.25
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/get_hit = SubResource( 3 )
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+modulate = Color( 0.737255, 0.376471, 0.376471, 1 )
+margin_left = -15.0
+margin_top = -38.0
+margin_right = 14.0
+margin_bottom = -34.0
+grow_horizontal = 0
+theme = ExtResource( 5 )
+custom_styles/fg = SubResource( 4 )
+custom_styles/bg = SubResource( 5 )
+step = 1.0
+value = 60.0
+percent_visible = false
+
+[node name="Label" type="Label" parent="."]
+margin_left = -15.0
+margin_top = -49.0
+margin_right = 14.0
+margin_bottom = -39.0
+theme = ExtResource( 5 )
+text = "Goblin"
 
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
 [connection signal="frame_changed" from="AnimatedSprite" to="." method="_on_AnimatedSprite_frame_changed"]

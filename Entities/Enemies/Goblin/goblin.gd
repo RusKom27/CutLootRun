@@ -27,10 +27,13 @@ var bounce_countdown = 0
 
 # Animation variables
 var other_animation_playing = false
+var is_attacking = false;
 
 func _ready():
 	arise()
 	player = get_tree().root.get_node("Root/Map/YSort/Player")
+	$HealthBar.max_value = health_max
+	$HealthBar.value = health	
 	rng.randomize()
 
 
@@ -47,12 +50,15 @@ func _process(delta):
 			# Play attack animation
 			other_animation_playing = true
 			var animation = "attack"
+			is_attacking = true
 			$AnimatedSprite.play(animation)
 			# Add cooldown time to current time
 			next_attack_time = now + attack_cooldown_time
 
 func _physics_process(delta):
 	var movement = direction * speed * delta
+	if is_attacking:
+		movement = direction * 0 * delta
 	var collision = move_and_collide(movement)
 	
 	if collision != null and collision.collider.name != "Player":
@@ -103,7 +109,9 @@ func hit(damage):
 	health -= damage
 	if health > 0:
 		$AnimationPlayer.play("get_hit")
+		$HealthBar.value = health
 	else:
+		$HealthBar.value = health
 		$Timer.stop()
 		direction = Vector2.ZERO
 		set_process(false)
@@ -150,5 +158,6 @@ func _on_AnimatedSprite_frame_changed():
 	if $AnimatedSprite.animation.ends_with("attack") and $AnimatedSprite.frame == 3:
 		var target = $RayCast2D.get_collider()
 		if target != null and target.name == "Player" and player.health > 0:
-			print(player.health)
 			player.hit(attack_damage)
+		is_attacking = false
+			

@@ -1,5 +1,6 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=25 format=2]
 
+[ext_resource path="res://Scenes/Scripts/SkillsControl.gd" type="Script" id=1]
 [ext_resource path="res://UI/Scripts/ChangeLevel.gd" type="Script" id=2]
 [ext_resource path="res://UI/Scripts/UIControl.gd" type="Script" id=3]
 [ext_resource path="res://Entities/Player/Player.tscn" type="PackedScene" id=4]
@@ -30,6 +31,26 @@ region_rect = Rect2( 1, 0, 96, 13 )
 texture = ExtResource( 10 )
 region_rect = Rect2( 1, 0, 98, 13 )
 axis_stretch_horizontal = 1
+
+[sub_resource type="Animation" id=14]
+resource_name = "Новая анимация"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.05, 1.05 ), Vector2( 1.06, 1.06 ), Vector2( 1.04, 1.04 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "Новая анимация (2)"
 
 [sub_resource type="DynamicFont" id=13]
 size = 12
@@ -88,13 +109,28 @@ margin_right = 112.0
 margin_bottom = 30.0
 texture = ExtResource( 14 )
 
-[node name="Label" type="Label" parent="CanvasLayer/GameUI/XPIcon"]
-margin_right = 14.0
+[node name="levels" type="Label" parent="CanvasLayer/GameUI/XPIcon"]
+margin_left = 14.0
+margin_right = 30.0
 margin_bottom = 14.0
 theme = ExtResource( 12 )
 text = "0"
-align = 1
 valign = 1
+
+[node name="upgrades" type="Label" parent="CanvasLayer/GameUI/XPIcon"]
+margin_left = 30.0
+margin_right = 53.0
+margin_bottom = 14.0
+theme = ExtResource( 12 )
+valign = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/GameUI/XPIcon/upgrades"]
+autoplay = "Новая анимация"
+reset_on_save = false
+playback_speed = 0.3
+method_call_mode = 1
+"anims/Новая анимация" = SubResource( 14 )
+"anims/Новая анимация (2)" = SubResource( 15 )
 
 [node name="HealthIcon" type="TextureRect" parent="CanvasLayer/GameUI"]
 modulate = Color( 0.737255, 0.376471, 0.376471, 1 )
@@ -107,21 +143,29 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Label" type="Label" parent="CanvasLayer/GameUI/HealthIcon"]
+margin_left = 14.0
+margin_top = -2.0
+margin_right = 54.0
+margin_bottom = 12.0
+theme = ExtResource( 12 )
+text = "0/0"
+valign = 1
+
 [node name="PauseButton" type="TextureButton" parent="CanvasLayer/GameUI"]
-margin_left = 339.0
-margin_top = 1.0
-margin_right = 349.0
-margin_bottom = 11.0
+margin_left = 337.0
+margin_top = 3.0
+margin_right = 347.0
+margin_bottom = 13.0
 texture_normal = ExtResource( 22 )
 expand = true
 
 [node name="Menu" type="Control" parent="CanvasLayer"]
-visible = false
 modulate = Color( 0.905882, 0.905882, 0.905882, 1 )
 margin_left = 61.0
-margin_top = 25.0
+margin_top = 34.0
 margin_right = 277.0
-margin_bottom = 145.0
+margin_bottom = 154.0
 
 [node name="Panel" type="NinePatchRect" parent="CanvasLayer/Menu"]
 margin_left = 54.0
@@ -139,9 +183,9 @@ __meta__ = {
 }
 
 [node name="Skills" type="Control" parent="CanvasLayer/Menu/Panel"]
-visible = false
 margin_right = 162.0
 margin_bottom = 120.0
+script = ExtResource( 1 )
 
 [node name="Buttons" type="Control" parent="CanvasLayer/Menu/Panel/Skills"]
 margin_top = 2.0
@@ -304,6 +348,7 @@ margin_right = 40.0
 margin_bottom = 24.0
 theme = ExtResource( 12 )
 text = "Health: 100"
+valign = 1
 
 [node name="Damage" type="Label" parent="CanvasLayer/Menu/Panel/Skills/Info"]
 margin_top = 35.0
@@ -311,6 +356,7 @@ margin_right = 40.0
 margin_bottom = 49.0
 theme = ExtResource( 12 )
 text = "Damage: 12"
+valign = 1
 
 [node name="Regeneration" type="Label" parent="CanvasLayer/Menu/Panel/Skills/Info"]
 margin_top = 61.0
@@ -318,6 +364,7 @@ margin_right = 68.0
 margin_bottom = 75.0
 theme = ExtResource( 12 )
 text = "Regeneration: 3"
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -328,6 +375,17 @@ margin_right = 68.0
 margin_bottom = 100.0
 theme = ExtResource( 12 )
 text = "Movement: 20"
+valign = 1
+
+[node name="Upgrades" type="Label" parent="CanvasLayer/Menu/Panel/Skills/Info"]
+modulate = Color( 1, 1, 1, 0.494118 )
+margin_left = 29.0
+margin_top = 104.0
+margin_right = 97.0
+margin_bottom = 118.0
+theme = ExtResource( 12 )
+text = "Upgrades: 0"
+valign = 1
 
 [node name="Options" type="Control" parent="CanvasLayer/Menu/Panel"]
 visible = false
@@ -1571,6 +1629,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="GameOverUI" type="Control" parent="CanvasLayer"]
+margin_right = 40.0
+margin_bottom = 40.0
+
 [node name="Map" type="Node2D" parent="."]
 pause_mode = 1
 script = ExtResource( 5 )
@@ -1579,7 +1641,7 @@ script = ExtResource( 5 )
 
 [node name="Player" parent="Map/YSort" instance=ExtResource( 4 )]
 position = Vector2( 224, 117 )
-xp_next_level = 100
+xp_next_level = 10
 
 [node name="Fog" type="Sprite" parent="."]
 light_mask = 7
@@ -1591,6 +1653,12 @@ texture = ExtResource( 7 )
 color = Color( 0, 0, 0, 1 )
 
 [connection signal="button_down" from="CanvasLayer/GameUI/PauseButton" to="CanvasLayer" method="_on_PauseButton_button_down"]
+[connection signal="draw" from="CanvasLayer/Menu/Panel/Skills" to="CanvasLayer/Menu/Panel/Skills" method="_on_Skills_draw"]
+[connection signal="update_upgrades" from="CanvasLayer/Menu/Panel/Skills" to="CanvasLayer" method="_on_Skills_update_upgrades"]
+[connection signal="button_down" from="CanvasLayer/Menu/Panel/Skills/Buttons/AddHPButton" to="CanvasLayer/Menu/Panel/Skills" method="_on_AddHPButton_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Panel/Skills/Buttons/AddDMGButton" to="CanvasLayer/Menu/Panel/Skills" method="_on_AddDMGButton_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Panel/Skills/Buttons/AddREGButton" to="CanvasLayer/Menu/Panel/Skills" method="_on_AddREGButton_button_down"]
+[connection signal="button_down" from="CanvasLayer/Menu/Panel/Skills/Buttons/AddMOVButton" to="CanvasLayer/Menu/Panel/Skills" method="_on_AddMOVButton_button_down"]
 [connection signal="button_down" from="CanvasLayer/Menu/Panel/Inventory/Cell1" to="CanvasLayer/Menu/Panel/Inventory/Cell1" method="_on_Button_button_down"]
 [connection signal="button_down" from="CanvasLayer/Menu/Panel/Inventory/Cell2" to="CanvasLayer/Menu/Panel/Inventory/Cell2" method="_on_Button_button_down"]
 [connection signal="button_down" from="CanvasLayer/Menu/Panel/Inventory/Cell3" to="CanvasLayer/Menu/Panel/Inventory/Cell3" method="_on_Button_button_down"]
@@ -1633,4 +1701,5 @@ color = Color( 0, 0, 0, 1 )
 [connection signal="button_down" from="CanvasLayer/Menu/Buttons/SaveButton" to="CanvasLayer" method="_on_SaveButton_button_down"]
 [connection signal="button_down" from="CanvasLayer/Menu/Buttons/ExitButton" to="CanvasLayer" method="_on_ExitButton_button_down"]
 [connection signal="player_level_up" from="Map/YSort/Player" to="CanvasLayer" method="_on_Player_player_level_up"]
+[connection signal="player_level_up" from="Map/YSort/Player" to="CanvasLayer/Menu/Panel/Skills" method="_on_Player_player_level_up"]
 [connection signal="player_stats_changed" from="Map/YSort/Player" to="CanvasLayer" method="_on_Player_player_stats_changed"]

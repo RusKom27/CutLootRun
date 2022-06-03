@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Entities/Player/player.gd" type="Script" id=1]
 [ext_resource path="res://Entities/Player/Player_Animation.tres" type="SpriteFrames" id=2]
@@ -27,6 +27,22 @@ void fragment()
 [sub_resource type="ShaderMaterial" id=8]
 shader = SubResource( 7 )
 shader_param/amount = 100
+
+[sub_resource type="Animation" id=9]
+resource_name = "Hit"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.427451, 0.427451, 0.427451, 1 ), Color( 1, 1, 1, 1 ), Color( 0.427451, 0.427451, 0.427451, 1 ), Color( 1, 1, 1, 1 ), Color( 0.427451, 0.427451, 0.427451, 1 ), Color( 1, 1, 1, 1 ), Color( 0.427451, 0.427451, 0.427451, 1 ) ]
+}
 
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 161, 91 )
@@ -78,5 +94,8 @@ range_item_cull_mask = 3
 shadow_enabled = true
 shadow_color = Color( 0, 0, 0, 0.0470588 )
 shadow_gradient_length = 1.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Hit = SubResource( 9 )
 
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]

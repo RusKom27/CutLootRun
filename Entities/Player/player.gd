@@ -8,15 +8,16 @@ export var attack_cooldown_time = 1000
 var next_attack_time = 0
 export var attack_damage = 30
 
-export var health = 100
+var health = 100
 export var health_max = 100
 export var health_regeneration = 1
 export var mana = 100
 export var mana_max = 100
 export var mana_regeneration = 2
-export var xp = 0;
-export var xp_next_level = 2;
-export var level = 0;
+export var xp = 0
+export var xp_next_level = 2
+export var level = 0
+export var upgrades = 0
 
 var last_direction = Vector2(0, 1)
 var last_turn = "right"
@@ -103,16 +104,17 @@ func _on_AnimatedSprite_animation_finished():
 func hit(damage):
 	health -= damage
 	emit_signal("player_stats_changed", self)
-#	if health <= 0:
-#		set_process(false)
-#	else:
-#		$AnimationPlayer.play("Hit")
+	if health <= 0:
+		set_process(false)
+	else:
+		$AnimationPlayer.play("Hit")
 
 func add_xp(value):
 	xp += value
 	if xp >= xp_next_level:
 		level += 1
 		xp_next_level *= 2
+		upgrades += 1
 		emit_signal("player_level_up", self)
 	emit_signal("player_stats_changed", self)
 

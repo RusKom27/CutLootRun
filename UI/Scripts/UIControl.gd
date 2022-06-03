@@ -76,11 +76,23 @@ func _on_Levels_level_changed():
 
 
 func _on_Player_player_level_up(var player):
-	$GameUI/XPIcon/Label.text = str(player.level)
+	$GameUI/XPIcon/levels.text = str(player.level)
+	if player.upgrades > 0:
+		$GameUI/XPIcon/upgrades.text = "+" + str(player.upgrades)
+	else:
+		$GameUI/XPIcon/upgrades.text = ""
 
 
 func _on_Player_player_stats_changed(var player):
 	$GameUI/HealthBar.max_value = player.health_max
 	$GameUI/HealthBar.value = player.health
+	$GameUI/HealthIcon/Label.text = str(int(player.health)) + "/" + str(player.health_max)
 	$GameUI/XPBar.max_value = player.xp_next_level
 	$GameUI/XPBar.value = player.xp
+
+
+func _on_Skills_update_upgrades(var player):
+	if player.upgrades > 0:
+		$GameUI/XPIcon/upgrades.text = "+" + str(player.upgrades)
+	else:
+		$GameUI/XPIcon/upgrades.text = ""
