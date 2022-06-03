@@ -1,4 +1,4 @@
-extends Node2D
+extends CanvasLayer
 
 enum PanelComponent {
 	Skills,
@@ -7,21 +7,26 @@ enum PanelComponent {
 	Levels
 }
 
+enum GameUIComponent {
+	XPBar,
+	HealthBar,
+	XPIcon,
+	HealthIcon,
+	PauseButton
+}
+
 onready var tree = get_tree()
-onready var canvas = tree.root.get_node("Root/CanvasLayer");
-onready var gameUI = canvas.get_child(0)
-onready var menu = canvas.get_child(1)
-onready var panel = menu.get_child(0)
 
 
 func _ready():
 	tree.paused = true
 	changePauseState()
+	
 
 func changePauseState():
 	tree.paused = !tree.paused
-	menu.visible = tree.paused
-	gameUI.visible = !tree.paused
+	$Menu.visible = tree.paused
+	$GameUI.visible = !tree.paused
 	switch_panel_components(PanelComponent.Levels)
 
 
@@ -42,11 +47,11 @@ func _on_ExitButton_button_down():
 
 
 func switch_panel_components(needed_component: int):
-	for i in range(panel.get_child_count()):
+	for i in range($Menu/Panel.get_child_count()):
 		if i == needed_component:
-			panel.get_child(i).visible = true
+			$Menu/Panel.get_child(i).visible = true
 		else:
-			panel.get_child(i).visible = false
+			$Menu/Panel.get_child(i).visible = false
 		
 
 
@@ -64,3 +69,18 @@ func _on_InventoryButton_button_down():
 
 func _on_SaveButton_button_down():
 	pass # Replace with function body.
+
+
+func _on_Levels_level_changed():
+	changePauseState()
+
+
+func _on_Player_player_level_up(var player):
+	$GameUI/XPIcon/Label.text = str(player.level)
+
+
+func _on_Player_player_stats_changed(var player):
+	$GameUI/HealthBar.max_value = player.health_max
+	$GameUI/HealthBar.value = player.health
+	$GameUI/XPBar.max_value = player.xp_next_level
+	$GameUI/XPBar.value = player.xp

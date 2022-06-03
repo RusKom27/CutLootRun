@@ -4,19 +4,19 @@ signal player_stats_changed
 signal player_level_up
 
 export var speed = 75
-var attack_cooldown_time = 1000
+export var attack_cooldown_time = 1000
 var next_attack_time = 0
-var attack_damage = 30
+export var attack_damage = 30
 
-var health = 100
-var health_max = 100
-var health_regeneration = 1
-var mana = 100
-var mana_max = 100
-var mana_regeneration = 2
-var xp = 0;
-var xp_next_level = 100;
-var level = 1;
+export var health = 100
+export var health_max = 100
+export var health_regeneration = 1
+export var mana = 100
+export var mana_max = 100
+export var mana_regeneration = 2
+export var xp = 0;
+export var xp_next_level = 2;
+export var level = 0;
 
 var last_direction = Vector2(0, 1)
 var last_turn = "right"
@@ -24,6 +24,7 @@ var attack_playing = false
 
 func _ready():
 	emit_signal("player_stats_changed", self)
+	emit_signal("player_level_up", self)
 
 func _physics_process(delta):
 	# Get player input
@@ -112,7 +113,7 @@ func add_xp(value):
 	if xp >= xp_next_level:
 		level += 1
 		xp_next_level *= 2
-		emit_signal("player_level_up")
+		emit_signal("player_level_up", self)
 	emit_signal("player_stats_changed", self)
 
 func get_animation_direction(direction: Vector2):

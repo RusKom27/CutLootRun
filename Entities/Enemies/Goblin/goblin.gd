@@ -30,7 +30,7 @@ var other_animation_playing = false
 
 func _ready():
 	arise()
-	player = get_tree().root.get_node("Root/Map/Level/YSort/Player")
+	player = get_tree().root.get_node("Root/Map/YSort/Player")
 	rng.randomize()
 
 

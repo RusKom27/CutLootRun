@@ -1,8 +1,16 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://UI/Frames/ui_button.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/StartMenu.gd" type="Script" id=2]
 [ext_resource path="res://UI/MinecraftRegular-Bmg3.otf" type="DynamicFontData" id=3]
+[ext_resource path="res://Shaders/fog.gdshader" type="Shader" id=4]
+[ext_resource path="res://Light/Frames/spot.png" type="Texture" id=5]
+
+[sub_resource type="ShaderMaterial" id=19]
+render_priority = 1
+shader = ExtResource( 4 )
+shader_param/color = Vector3( 0.884, 0.762, 0.847 )
+shader_param/OCTAVES = 19
 
 [sub_resource type="DynamicFont" id=17]
 size = 12
@@ -22,6 +30,20 @@ button/constants/height = 12
 pause_mode = 2
 self_modulate = Color( 0, 0, 0, 1 )
 script = ExtResource( 2 )
+
+[node name="Fog" type="Sprite" parent="."]
+light_mask = 7
+material = SubResource( 19 )
+position = Vector2( -0.000244141, 25.0002 )
+scale = Vector2( 66.0703, 66.0703 )
+texture = ExtResource( 5 )
+
+[node name="Fog2" type="Sprite" parent="."]
+light_mask = 7
+material = SubResource( 19 )
+position = Vector2( -0.000244141, 25.0002 )
+scale = Vector2( 6607.03, 6607.03 )
+texture = ExtResource( 5 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -48,9 +70,6 @@ margin_right = 54.0
 margin_bottom = 20.0
 custom_fonts/font = SubResource( 17 )
 flat = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Buttons/ContinueButton"]
 margin_right = 54.0
@@ -74,9 +93,6 @@ text = "Continue"
 align = 1
 valign = 1
 autowrap = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Button4" type="Button" parent="CanvasLayer/Buttons"]
 margin_top = 20.0
