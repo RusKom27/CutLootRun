@@ -47,12 +47,13 @@ func _on_ExitButton_button_down():
 
 
 func switch_panel_components(needed_component: int):
+	$AnimationPlayer.play("Switch_out")
+	$Menu/Panel.visible = true
 	for i in range($Menu/Panel.get_child_count()):
 		if i == needed_component:
 			$Menu/Panel.get_child(i).visible = true
 		else:
 			$Menu/Panel.get_child(i).visible = false
-		
 
 
 func _on_SkillSButton_button_down():
@@ -89,6 +90,7 @@ func _on_Player_player_stats_changed(var player):
 	$GameUI/HealthIcon/Label.text = str(int(player.health)) + "/" + str(player.health_max)
 	$GameUI/XPBar.max_value = player.xp_next_level
 	$GameUI/XPBar.value = player.xp
+	$GameUI/Gold.text = str(player.gold)
 
 
 func _on_Skills_update_upgrades(var player):
@@ -96,3 +98,5 @@ func _on_Skills_update_upgrades(var player):
 		$GameUI/XPIcon/upgrades.text = "+" + str(player.upgrades)
 	else:
 		$GameUI/XPIcon/upgrades.text = ""
+
+

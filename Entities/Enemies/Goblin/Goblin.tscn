@@ -1,10 +1,20 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Entities/Enemies/Goblin/Goblin_Animation.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Entities/Enemies/Goblin/goblin.gd" type="Script" id=2]
 [ext_resource path="res://UI/Frames/empty_bar_ui.png" type="Texture" id=3]
 [ext_resource path="res://UI/Frames/hp_bar_ui.png" type="Texture" id=4]
 [ext_resource path="res://UI/Main.tres" type="Theme" id=5]
+[ext_resource path="res://Shaders/outline_inline.gdshader" type="Shader" id=6]
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = ExtResource( 6 )
+shader_param/rainbow = false
+shader_param/line_color = Color( 0.113725, 0.117647, 0.0705882, 1 )
+shader_param/line_scale = 0.5
+shader_param/frequency = 0.5
+shader_param/light_offset = 0.5
+shader_param/alpha = 1.0
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10, 4 )
@@ -41,11 +51,11 @@ region_rect = Rect2( 1, 0, 96, 13 )
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-light_mask = 2
+material = SubResource( 6 )
 position = Vector2( 0, -20.991 )
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 1
+frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

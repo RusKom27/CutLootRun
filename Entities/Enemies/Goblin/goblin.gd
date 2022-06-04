@@ -8,6 +8,8 @@ var player
 # Random number generator
 var rng = RandomNumberGenerator.new()
 
+var item_drop_resource = load("res://Entities/Items/Item.tscn")
+
 # Skeleton stats
 var health = 100
 var health_max = 100
@@ -126,6 +128,9 @@ func _on_AnimatedSprite_animation_finished():
 		$Timer.start()
 	elif $AnimatedSprite.animation == "death":
 		get_tree().queue_delete(self)
+		var item_drop = item_drop_resource.instance()
+		item_drop.position = position
+		get_parent().add_child(item_drop)
 	other_animation_playing = false
 
 
@@ -141,6 +146,7 @@ func _on_Timer_timeout():
 		elif player_relative_position.length() <= 80 and bounce_countdown == 0:
 			# If player is within range, move toward it
 			direction = player_relative_position.normalized()
+			$RayCast2D.cast_to = player_relative_position.normalized()
 		elif bounce_countdown == 0:
 			# If player is too far, randomly decide whether to stand still or where to move
 			var random_number = rng.randf()

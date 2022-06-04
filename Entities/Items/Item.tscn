@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Shaders/outline_inline.gdshader" type="Shader" id=1]
+[ext_resource path="res://Entities/Items/Scripts/ItemControl.gd" type="Script" id=2]
+
+[sub_resource type="ShaderMaterial" id=19]
+shader = ExtResource( 1 )
+shader_param/rainbow = true
+shader_param/line_color = Color( 1, 1, 1, 1 )
+shader_param/line_scale = 0.5
+shader_param/frequency = 0.757
+shader_param/light_offset = 0.5
+shader_param/alpha = 1.0
+
+[sub_resource type="Animation" id=16]
+resource_name = "arise"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("TextureRect:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 0.554785, 2.92817, 1e-05 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.4, 0.4 ), Vector2( 0.8, 0.8 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="CircleShape2D" id=17]
+
+[node name="Item" type="Node2D"]
+position = Vector2( 583, 13 )
+script = ExtResource( 2 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource( 19 )
+margin_right = 23.0
+margin_bottom = 23.0
+rect_pivot_offset = Vector2( 11, 11 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+method_call_mode = 1
+anims/arise = SubResource( 16 )
+
+[node name="ItemArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemArea"]
+position = Vector2( 12, 12 )
+shape = SubResource( 17 )
+one_way_collision_margin = 0.0
