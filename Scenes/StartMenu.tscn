@@ -1,30 +1,21 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://UI/Frames/ui_button.png" type="Texture" id=1]
-[ext_resource path="res://Scripts/StartMenu.gd" type="Script" id=2]
 [ext_resource path="res://UI/MinecraftRegular-Bmg3.otf" type="DynamicFontData" id=3]
-[ext_resource path="res://Shaders/fog.gdshader" type="Shader" id=4]
-[ext_resource path="res://Light/Frames/spot.png" type="Texture" id=5]
 [ext_resource path="res://UI/Main.tres" type="Theme" id=6]
-
-[sub_resource type="ShaderMaterial" id=19]
-render_priority = 1
-shader = ExtResource( 4 )
-shader_param/color = Vector3( 0.884, 0.762, 0.847 )
-shader_param/OCTAVES = 19
 
 [sub_resource type="DynamicFont" id=17]
 size = 12
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=16]
+[sub_resource type="DynamicFont" id=21]
 size = 10
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 3 )
 
 [sub_resource type="Theme" id=18]
-default_font = SubResource( 16 )
+default_font = SubResource( 21 )
 button/constants/height = 12
 
 [sub_resource type="Animation" id=20]
@@ -59,21 +50,6 @@ tracks/1/keys = {
 [node name="Node2D" type="Node2D"]
 pause_mode = 2
 self_modulate = Color( 0, 0, 0, 1 )
-script = ExtResource( 2 )
-
-[node name="Fog" type="Sprite" parent="."]
-light_mask = 7
-material = SubResource( 19 )
-position = Vector2( -0.000244141, 25.0002 )
-scale = Vector2( 66.0703, 66.0703 )
-texture = ExtResource( 5 )
-
-[node name="Fog2" type="Sprite" parent="."]
-light_mask = 7
-material = SubResource( 19 )
-position = Vector2( -0.000244141, 25.0002 )
-scale = Vector2( 6607.03, 6607.03 )
-texture = ExtResource( 5 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -112,17 +88,14 @@ align = 1
 valign = 1
 autowrap = true
 
-[node name="Button4" type="Button" parent="CanvasLayer/Buttons"]
+[node name="NewGameButton" type="Button" parent="CanvasLayer/Buttons"]
 margin_top = 20.0
 margin_right = 54.0
 margin_bottom = 40.0
 rect_pivot_offset = Vector2( 19, -4 )
 flat = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Buttons/Button4"]
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Buttons/NewGameButton"]
 margin_right = 54.0
 margin_bottom = 20.0
 texture = ExtResource( 1 )
@@ -134,7 +107,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="CanvasLayer/Buttons/Button4"]
+[node name="Label" type="Label" parent="CanvasLayer/Buttons/NewGameButton"]
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 52.0
@@ -227,8 +200,8 @@ margin_left = 148.0
 margin_top = 19.0
 margin_right = 204.0
 margin_bottom = 33.0
-rect_rotation = 1.60443
-rect_scale = Vector2( 2.53797, 2.53797 )
+rect_rotation = 2.0
+rect_scale = Vector2( 3, 3 )
 rect_pivot_offset = Vector2( 28, 6 )
 theme = ExtResource( 6 )
 text = "CutLootRun"
@@ -236,8 +209,9 @@ text = "CutLootRun"
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Idle"
 reset_on_save = false
-playback_speed = 0.5
+playback_speed = 0.1
 method_call_mode = 1
 anims/Idle = SubResource( 20 )
 
 [connection signal="button_down" from="CanvasLayer/Buttons/ContinueButton" to="." method="_on_ContinueButton_button_down"]
+[connection signal="button_down" from="CanvasLayer/Buttons/NewGameButton" to="." method="_on_NewGameButton_button_down"]

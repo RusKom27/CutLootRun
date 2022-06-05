@@ -19,11 +19,12 @@ func update_items():
 		inventory_slot.get_node("Name").text = item.name
 		inventory_slot.get_node("Stats").text = ""
 		for stat in item.stats:
-			print(stat)
-			inventory_slot.get_node("Stats").text += "\n" + Stats.keys()[stat] + ": " + str(item.stats.get(stat))
+			inventory_slot.get_node("Stats").text += "\n" + Stats[stat] + ": " + str(item.stats.get(stat))
 
 
 func _on_Player_item_taked(var _player):
+	var canvas = get_parent().get_parent().get_parent()
+	canvas.show_event_text("Taken " + _player.near_item.item_data.name)
 	player = _player
 
 

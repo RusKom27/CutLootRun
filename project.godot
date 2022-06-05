@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="CutLootRun"
-run/main_scene="res://Scenes/StartMenu.tscn"
+run/main_scene="res://Scenes/Main.tscn"
 
 [autoload]
 
@@ -28,6 +28,7 @@ window/size/width=350
 window/size/height=180
 window/size/test_width=1500
 window/size/test_height=800
+window/vsync/use_vsync=false
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
 
@@ -116,7 +117,7 @@ quality/shadows/filter_mode=0
 quality/shading/force_vertex_shading=true
 quality/filters/anisotropic_filter_level=1
 2d/opengl/batching_stream=2
-environment/default_clear_color=Color( 0.027451, 0.027451, 0.027451, 1 )
+environment/default_clear_color=Color( 0, 0, 0, 1 )
 
 [world]
 

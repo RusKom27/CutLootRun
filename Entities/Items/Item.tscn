@@ -1,14 +1,14 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Shaders/outline_inline.gdshader" type="Shader" id=1]
-[ext_resource path="res://Entities/Items/Scripts/ItemControl.gd" type="Script" id=2]
+[ext_resource path="res://Entities/Items/ItemControl.gd" type="Script" id=2]
 
 [sub_resource type="ShaderMaterial" id=19]
 shader = ExtResource( 1 )
-shader_param/rainbow = true
-shader_param/line_color = Color( 1, 1, 1, 1 )
-shader_param/line_scale = 0.5
-shader_param/frequency = 0.757
+shader_param/rainbow = false
+shader_param/line_color = Color( 0, 0, 0, 1 )
+shader_param/line_scale = 0.7
+shader_param/frequency = 0.814
 shader_param/light_offset = 0.5
 shader_param/alpha = 1.0
 

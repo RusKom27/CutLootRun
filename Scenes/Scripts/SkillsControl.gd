@@ -23,7 +23,7 @@ func update_stats_on_UI():
 		for button in $Buttons.get_children():
 			button.disabled = true
 			modulate.a = 0.3
-	emit_signal("update_upgrades", player)
+	emit_signal("update_upgrades")
 
 
 func _on_AddHPButton_button_down():

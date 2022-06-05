@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 var Stats = load("res://Scripts/ItemsData.gd").new().Stats
+var StatChangeText_resource = load("res://UI/Templates/StatChangeText.tscn")
 
 signal player_stats_changed
 signal player_level_up
@@ -8,28 +9,27 @@ signal item_collide
 signal item_out_collide
 signal item_taked
 
-var self_attack_damage = 30
-var self_speed = 75
-var self_health_max = 100
-var self_health_regeneration = 1
-var self_gold = 0
+export var self_attack_damage = 30
+export var self_speed = 75
+export var self_health_max = 100
+export var self_health_regeneration = 1
+export var self_gold = 0
 
 var attack_cooldown_time = 1000
 var next_attack_time = 0
 
 var health = 100
 
-export var health_max = 0
-export var attack_damage = 0
-export var health_regeneration = 0
-export var speed = 0
-export var gold = 0
+var health_max = 0
+var attack_damage = 0
+var health_regeneration = 0
+var speed = 0
+var gold = 0
 
 export var xp = 0
 export var xp_next_level = 2
 export var level = 0
 export var upgrades = 0
-
 
 var last_direction = Vector2(0, 1)
 var last_turn = "right"
@@ -42,7 +42,7 @@ var items = []
 func _ready():
 	update_stats()
 	emit_signal("player_stats_changed", self)
-	emit_signal("player_level_up", self)
+	emit_signal("player_level_up")
 
 func _physics_process(delta):
 	var direction: Vector2
@@ -59,7 +59,7 @@ func _physics_process(delta):
 	var collision = move_and_collide(movement)
 	
 	if not attack_playing:
-		animates_player(direction)
+		animation(direction)
 		
 	if direction != Vector2.ZERO:
 		var ray_cast = $RayCast2D
@@ -90,51 +90,52 @@ func _input(event):
 		if near_item != null:
 			items.append(near_item.take())
 			update_stats()
+			
 			emit_signal("item_taked", self)
 	if event.is_action_pressed("attack"):
 		var now = OS.get_ticks_msec()
 		if not attack_playing and now >= next_attack_time:
-			var target = $RayCast2D.get_collider()
-			if target != null:
-				if target.name.find("Goblin") >= 0:
-					target.hit(attack_damage)
-				if target.is_in_group("NPCs"):
-					target.talk()
-					return
-
 			attack_playing = true
 			var animation = "attack1"
 			$AnimatedSprite.play(animation)
 			next_attack_time = now + attack_cooldown_time
 		elif not attack_playing:
-			var target = $RayCast2D.get_collider()
-			if target != null:
-				if target.name.find("Goblin") >= 0:
-					target.hit(attack_damage)
 			attack_playing = true
 			var animation = "attack2"
 			$AnimatedSprite.play(animation)
 
-func update_stats(add_stat = -1,add_value = 0):
-	if add_stat != -1:
-		self["self_" + Stats.keys()[add_stat]] += add_value
+func update_stats(add_stat = "",add_value = 0):
+	if add_stat != "":
+		self["self_" + Stats[add_stat]] += add_value
 		upgrades -= 1
 	for stat in Stats.keys():
 		var items_stats = 0
 		for item in items:
 			for item_stat in item.stats:
-				if item_stat == Stats.get(stat):
+				if item_stat == Stats[stat]:
 					items_stats += item.stats.get(item_stat)
 		self[stat] = self["self_"+stat] + items_stats
 	emit_signal("player_stats_changed", self)
 		
+func attack():
+	var target = $RayCast2D.get_collider()
+	if target != null:
+		if target.is_in_group("Enemy"):
+			target.hit(attack_damage)
+
 func hit(damage):
 	health -= damage
 	emit_signal("player_stats_changed", self)
+	show_stat_change(-damage)
 	if health <= 0:
 		set_process(false)
 	else:
 		$AnimationPlayer.play("Hit")
+
+func show_stat_change(stat):
+	var StatChangeText = StatChangeText_resource.instance()
+	StatChangeText.set_stat(stat)
+	add_child(StatChangeText)
 
 func add_xp(value):
 	xp += value
@@ -154,7 +155,7 @@ func get_animation_direction(direction: Vector2):
 	else:
 		return last_turn
 
-func animates_player(direction: Vector2):
+func animation(direction: Vector2):
 	last_turn = get_animation_direction(last_direction)
 	if last_turn == "left":
 		$AnimatedSprite.flip_h = true
@@ -181,18 +182,29 @@ func _on_AnimatedSprite_animation_finished():
 	attack_playing = false
 
 
+func _on_AnimatedSprite_frame_changed():
+	if $AnimatedSprite.frame == 3 and attack_playing:
+		attack()
+
+
 func _on_Area2D_area_entered(area):
 	if area.name == "ItemArea":
 		var item = area.get_parent()
+		item.get_node("TextureRect").material.set_shader_param("rainbow", true)
 		near_item = item
 		emit_signal("item_collide", item)
 
 
 func _on_Area2D_area_exited(area):
 	if area.name == "ItemArea":
+		var item = area.get_parent()
+		item.get_node("TextureRect").material.set_shader_param("rainbow", false)
 		near_item = null
 		emit_signal("item_out_collide", area.get_parent())
 		
 
 func _on_Skills_update_upgrades():
 	update_stats()
+
+
+

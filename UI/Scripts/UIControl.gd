@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+signal paused
+
 enum PanelComponent {
 	Skills,
 	Options,
@@ -16,7 +18,9 @@ enum GameUIComponent {
 }
 
 onready var tree = get_tree()
+onready var EventText_resource = load("res://UI/Templates/EventText.tscn")
 
+var level_name = ""
 
 func _ready():
 	tree.paused = true
@@ -28,6 +32,13 @@ func changePauseState():
 	$Menu.visible = tree.paused
 	$GameUI.visible = !tree.paused
 	switch_panel_components(PanelComponent.Levels)
+	emit_signal("paused", tree.paused)
+
+
+func show_event_text(text):
+	var EventText = EventText_resource.instance()
+	EventText.set_event_text(text)
+	add_child(EventText)
 
 
 func _input(event):
@@ -69,10 +80,10 @@ func _on_InventoryButton_button_down():
 
 
 func _on_SaveButton_button_down():
-	pass # Replace with function body.
+	get_parent().get_node("SaveLoadNode").save_game()
 
 
-func _on_Levels_level_changed():
+func _on_Levels_level_changed(var level):
 	changePauseState()
 
 
@@ -99,4 +110,11 @@ func _on_Skills_update_upgrades(var player):
 	else:
 		$GameUI/XPIcon/upgrades.text = ""
 
+func change_level_name(var _level_name):
+	level_name = _level_name
+	$GameUI/LevelName/AnimationPlayer.play("hide")
 
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if anim_name == "hide":
+		$GameUI/LevelName.text = level_name
+		$GameUI/LevelName/AnimationPlayer.play("show")
