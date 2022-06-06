@@ -1,11 +1,10 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://Scenes/Scripts/SkillsControl.gd" type="Script" id=1]
 [ext_resource path="res://UI/Scripts/ChangeLevel.gd" type="Script" id=2]
 [ext_resource path="res://UI/Scripts/UIControl.gd" type="Script" id=3]
 [ext_resource path="res://Entities/Player/Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Scripts/MapControl.gd" type="Script" id=5]
-[ext_resource path="res://Scenes/Levels/Home.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Scripts/StartMenu.gd" type="Script" id=7]
 [ext_resource path="res://Entities/Items/Frames/gold.png" type="Texture" id=8]
 [ext_resource path="res://UI/Frames/hp_bar_ui.png" type="Texture" id=10]
@@ -185,7 +184,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=29]
-length = 0.001
+length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Map:position")
 tracks/0/interp = 1
@@ -309,7 +308,7 @@ tracks/9/keys = {
 
 [sub_resource type="Animation" id=31]
 resource_name = "hide_game"
-length = 0.3
+length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("Map:position")
 tracks/0/interp = 1
@@ -317,7 +316,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3 ),
+"times": PoolRealArray( 0, 0.6 ),
 "transitions": PoolRealArray( 0.535887, 1.68179 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( -2000, 0 ) ]
@@ -329,7 +328,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3 ),
+"times": PoolRealArray( 0, 0.6 ),
 "transitions": PoolRealArray( 0.482968, 1.62451 ),
 "update": 0,
 "values": [ Transform2D( 1, 0, 0, 1, 0, 0 ), Transform2D( 1, 0, 0, 1, -2000, 0 ) ]
@@ -341,7 +340,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.3 ),
+"times": PoolRealArray( 0, 0.6 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Transform2D( 1, 0, 0, 1, -2000, 0 ), Transform2D( 1, 0, 0, 1, 0, 0 ) ]
@@ -409,7 +408,7 @@ tracks/7/keys = {
 
 [sub_resource type="Animation" id=30]
 resource_name = "show_game"
-length = 0.3
+length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("Map:position")
 tracks/0/interp = 1
@@ -417,7 +416,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3 ),
+"times": PoolRealArray( 0, 0.6 ),
 "transitions": PoolRealArray( 0.535887, 1.68179 ),
 "update": 0,
 "values": [ Vector2( -2000, 0 ), Vector2( 0, 0 ) ]
@@ -429,7 +428,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3 ),
+"times": PoolRealArray( 0, 0.6 ),
 "transitions": PoolRealArray( 0.482968, 1.62451 ),
 "update": 0,
 "values": [ Transform2D( 1, 0, 0, 1, -2000, 0 ), Transform2D( 1, 0, 0, 1, 0, 0 ) ]
@@ -441,7 +440,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.3 ),
+"times": PoolRealArray( 0, 0.6 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Transform2D( 1, 0, 0, 1, 0, 0 ), Transform2D( 1, 0, 0, 1, -2000, 0 ) ]
@@ -682,6 +681,7 @@ margin_top = 6.0
 margin_right = 35.0
 margin_bottom = 29.0
 rect_pivot_offset = Vector2( 19, -4 )
+mouse_default_cursor_shape = 2
 flat = true
 
 [node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Panel/Skills/Buttons/AddHPButton"]
@@ -715,6 +715,7 @@ margin_top = 31.0
 margin_right = 35.0
 margin_bottom = 54.0
 rect_pivot_offset = Vector2( 19, -4 )
+mouse_default_cursor_shape = 2
 flat = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -751,6 +752,7 @@ margin_top = 56.0
 margin_right = 35.0
 margin_bottom = 79.0
 rect_pivot_offset = Vector2( 19, -4 )
+mouse_default_cursor_shape = 2
 flat = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -787,6 +789,7 @@ margin_top = 81.0
 margin_right = 35.0
 margin_bottom = 104.0
 rect_pivot_offset = Vector2( 19, -4 )
+mouse_default_cursor_shape = 2
 flat = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -887,6 +890,7 @@ margin_left = 50.0
 margin_top = 6.0
 margin_right = 158.0
 margin_bottom = 22.0
+mouse_default_cursor_shape = 2
 value = 34.0
 
 [node name="Label" type="Label" parent="CanvasLayer/Menu/Panel/Options/Volume"]
@@ -915,6 +919,7 @@ margin_left = 50.0
 margin_top = 6.0
 margin_right = 126.0
 margin_bottom = 22.0
+mouse_default_cursor_shape = 2
 value = 100.0
 
 [node name="Label2" type="Label" parent="CanvasLayer/Menu/Panel/Options/Quality"]
@@ -945,6 +950,7 @@ __meta__ = {
 margin_left = 40.0
 margin_right = 64.0
 margin_bottom = 24.0
+mouse_default_cursor_shape = 2
 
 [node name="Fog" type="Control" parent="CanvasLayer/Menu/Panel/Options"]
 margin_top = 76.0
@@ -966,6 +972,7 @@ __meta__ = {
 margin_left = 40.0
 margin_right = 64.0
 margin_bottom = 24.0
+mouse_default_cursor_shape = 2
 
 [node name="Inventory" type="Control" parent="CanvasLayer/Menu/Panel"]
 visible = false
@@ -995,6 +1002,7 @@ margin_top = 7.0
 margin_right = 39.0
 margin_bottom = 32.0
 rect_pivot_offset = Vector2( 19, -4 )
+mouse_default_cursor_shape = 2
 flat = true
 
 [node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Panel/Levels/Cell1"]
@@ -1025,6 +1033,7 @@ margin_top = 7.0
 margin_right = 66.0
 margin_bottom = 32.0
 rect_pivot_offset = Vector2( 19, -4 )
+mouse_default_cursor_shape = 2
 flat = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1058,6 +1067,7 @@ margin_top = 7.0
 margin_right = 93.0
 margin_bottom = 32.0
 rect_pivot_offset = Vector2( 19, -4 )
+mouse_default_cursor_shape = 2
 flat = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1429,6 +1439,7 @@ margin_bottom = 120.0
 margin_right = 54.0
 margin_bottom = 20.0
 rect_pivot_offset = Vector2( 27, 10 )
+mouse_default_cursor_shape = 2
 custom_fonts/font = SubResource( 13 )
 text = "Продолжить"
 flat = true
@@ -1464,10 +1475,8 @@ margin_top = 40.0
 margin_right = 54.0
 margin_bottom = 60.0
 rect_pivot_offset = Vector2( 27, 10 )
+mouse_default_cursor_shape = 2
 flat = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Buttons/SkillSButton"]
 margin_right = 54.0
@@ -1500,6 +1509,7 @@ margin_top = 80.0
 margin_right = 54.0
 margin_bottom = 100.0
 rect_pivot_offset = Vector2( 27, 10 )
+mouse_default_cursor_shape = 2
 flat = true
 
 [node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Buttons/OptionsButton"]
@@ -1533,10 +1543,8 @@ margin_top = 60.0
 margin_right = 54.0
 margin_bottom = 80.0
 rect_pivot_offset = Vector2( 27, 10 )
+mouse_default_cursor_shape = 2
 flat = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Buttons/InventoryButton"]
 margin_right = 54.0
@@ -1570,6 +1578,7 @@ margin_top = 20.0
 margin_right = 54.0
 margin_bottom = 40.0
 rect_pivot_offset = Vector2( 27, 10 )
+mouse_default_cursor_shape = 2
 flat = true
 
 [node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Buttons/SaveButton"]
@@ -1601,10 +1610,8 @@ margin_top = 100.0
 margin_right = 54.0
 margin_bottom = 120.0
 rect_pivot_offset = Vector2( 27, 10 )
+mouse_default_cursor_shape = 2
 flat = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Menu/Buttons/ExitButton"]
 margin_right = 54.0
@@ -1642,8 +1649,6 @@ pause_mode = 1
 visible = false
 position = Vector2( -2000, 0 )
 script = ExtResource( 5 )
-
-[node name="Level" parent="Map" instance=ExtResource( 6 )]
 
 [node name="YSort" type="YSort" parent="Map"]
 
@@ -1703,6 +1708,7 @@ margin_bottom = 120.0
 [node name="ContinueButton" type="Button" parent="StartMenu/MenuCanvas/Buttons"]
 margin_right = 54.0
 margin_bottom = 20.0
+mouse_default_cursor_shape = 2
 custom_fonts/font = SubResource( 26 )
 flat = true
 
@@ -1734,6 +1740,7 @@ margin_top = 20.0
 margin_right = 54.0
 margin_bottom = 40.0
 rect_pivot_offset = Vector2( 19, -4 )
+mouse_default_cursor_shape = 2
 flat = true
 
 [node name="NinePatchRect" type="NinePatchRect" parent="StartMenu/MenuCanvas/Buttons/NewGameButton"]
@@ -1767,6 +1774,7 @@ margin_top = 40.0
 margin_right = 54.0
 margin_bottom = 60.0
 rect_pivot_offset = Vector2( 19, -4 )
+mouse_default_cursor_shape = 2
 flat = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1803,6 +1811,7 @@ margin_top = 60.0
 margin_right = 54.0
 margin_bottom = 80.0
 rect_pivot_offset = Vector2( 19, -4 )
+mouse_default_cursor_shape = 2
 flat = true
 __meta__ = {
 "_edit_use_anchors_": false

@@ -17,8 +17,8 @@ func _on_Levels_level_changed(var lvl):
 	
 func change_lvl(lvl = "Home", load_data = {}, new_game = false):
 	if "level" in load_data:
-		load_lvl(load_data.level)
-		
+		current_level = load_data.level
+		load_lvl(current_level)
 		var player = $YSort/Player
 		for stat in load_data.Player:
 			if stat == "position":
@@ -31,7 +31,6 @@ func change_lvl(lvl = "Home", load_data = {}, new_game = false):
 		player.emit_signal("player_stats_changed", player)
 		player.emit_signal("player_level_up", player)
 		player.emit_signal("item_taked", player)
-		
 		for enemy in load_data.Enemies:
 			if enemy.health != 0:
 				var enemy_resource = load("res://Entities/Enemies/" + EnemyType[int(enemy.type)] + "/" + str(EnemyType[int(enemy.type)]) + ".tscn")
@@ -40,9 +39,12 @@ func change_lvl(lvl = "Home", load_data = {}, new_game = false):
 				enemy_entity.position = Vector2(enemy.position[0], enemy.position[1])
 				$YSort.add_child(enemy_entity)
 	else:
-		var level = load_lvl(lvl)
+		current_level = lvl
+		var level = load_lvl(current_level)
 		var player = $YSort/Player
 		if new_game:
+			current_level = "Home"
+			level = load_lvl(current_level)
 			var default_player_stats = get_default_player_stats()
 			for stat in default_player_stats:
 				if stat != "items":
@@ -76,6 +78,7 @@ func load_lvl(var lvl):
 		if entity != $YSort/Player:
 			$YSort.remove_child(entity)
 	add_child(level);
+	$YSort.add_child(level.get_node("Decorations"))
 	canvas.show_event_text("Level: " + str(current_level))
 	canvas.change_level_name("Level: " + str(current_level))
 	canvas.get_node("GameUI/LevelName").text = "Level: " + str(current_level)
