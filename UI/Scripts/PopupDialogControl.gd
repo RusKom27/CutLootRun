@@ -14,6 +14,5 @@ func _on_Player_item_collide(var item):
 	$Label.text = item.item_data.name + "\n[E]Take"
 	
 
-
-func _on_Player_item_out_collide(var item):
+func _on_Player_item_out_collide(var _item):
 	$AnimationPlayer.play("hide")

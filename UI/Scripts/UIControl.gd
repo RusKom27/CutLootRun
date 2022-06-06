@@ -22,9 +22,6 @@ onready var EventText_resource = load("res://UI/Templates/EventText.tscn")
 
 var level_name = ""
 
-func _ready():
-	tree.paused = true
-	changePauseState()
 	
 
 func changePauseState():
@@ -54,7 +51,7 @@ func _on_ContinueButton_button_down():
 
 
 func _on_ExitButton_button_down():
-	tree.change_scene("res://Scenes/StartMenu.tscn")
+	get_parent().exit_game()
 
 
 func switch_panel_components(needed_component: int):
@@ -83,7 +80,7 @@ func _on_SaveButton_button_down():
 	get_parent().get_node("SaveLoadNode").save_game()
 
 
-func _on_Levels_level_changed(var level):
+func _on_Levels_level_changed(var _lvl):
 	changePauseState()
 
 
@@ -118,3 +115,11 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "hide":
 		$GameUI/LevelName.text = level_name
 		$GameUI/LevelName/AnimationPlayer.play("show")
+
+
+func _on_SaveLoadNode_loaded():
+	show_event_text("Loaded!")
+
+
+func _on_SaveLoadNode_saved():
+	show_event_text("Saved!")

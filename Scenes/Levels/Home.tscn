@@ -78,5 +78,3 @@ position = Vector2( -28, 248 )
 
 [node name="G3" type="Node2D" parent="EnemySpawn"]
 position = Vector2( 146, 0 )
-
-[connection signal="tree_entered" from="." to="." method="_on_Level_tree_entered"]

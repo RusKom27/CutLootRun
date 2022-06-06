@@ -42,7 +42,7 @@ var items = []
 func _ready():
 	update_stats()
 	emit_signal("player_stats_changed", self)
-	emit_signal("player_level_up")
+	emit_signal("player_level_up", self)
 
 func _physics_process(delta):
 	var direction: Vector2
@@ -56,7 +56,7 @@ func _physics_process(delta):
 	if attack_playing:
 		movement = 0 * movement
 	
-	var collision = move_and_collide(movement)
+	var _collision = move_and_collide(movement)
 	
 	if not attack_playing:
 		animation(direction)
@@ -124,7 +124,7 @@ func attack():
 			target.hit(attack_damage)
 
 func hit(damage):
-	health -= damage
+	health = clamp(health - damage, 0, health_max)
 	emit_signal("player_stats_changed", self)
 	show_stat_change(-damage)
 	if health <= 0:
@@ -203,7 +203,7 @@ func _on_Area2D_area_exited(area):
 		emit_signal("item_out_collide", area.get_parent())
 		
 
-func _on_Skills_update_upgrades():
+func _on_Skills_update_upgrades(var _player):
 	update_stats()
 
 

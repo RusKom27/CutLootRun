@@ -6,7 +6,7 @@ var player = null
 
 
 func _ready():
-	for i in range(20):
+	for _i in range(20):
 		var inventory_slot = inventory_slot_resource.instance()
 		$GridContainer.add_child(inventory_slot)
 
@@ -23,9 +23,11 @@ func update_items():
 
 
 func _on_Player_item_taked(var _player):
-	var canvas = get_parent().get_parent().get_parent()
-	canvas.show_event_text("Taken " + _player.near_item.item_data.name)
 	player = _player
+	if player.near_item != null:
+		var canvas = get_parent().get_parent().get_parent()
+		canvas.show_event_text("Taken " + player.near_item.item_data.name)
+	
 
 
 func _on_Player_player_stats_changed(var _player):

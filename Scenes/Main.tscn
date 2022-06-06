@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://Scenes/Scripts/SkillsControl.gd" type="Script" id=1]
 [ext_resource path="res://UI/Scripts/ChangeLevel.gd" type="Script" id=2]
@@ -184,6 +184,329 @@ tracks/1/keys = {
 "values": [ 2.0, -2.0 ]
 }
 
+[sub_resource type="Animation" id=29]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Map:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -2000, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CanvasLayer:transform")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Transform2D( 1, 0, 0, 1, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("StartMenu:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -2000, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("StartMenu/MenuCanvas:transform")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Transform2D( 1, 0, 0, 1, -2000, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("StartMenu/MenuCanvas/Buttons:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("StartMenu/MenuCanvas/Label:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("CanvasLayer/GameUI:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("CanvasLayer/Menu:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("CanvasLayer/GameUI:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Map:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=31]
+resource_name = "hide_game"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("Map:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 0.535887, 1.68179 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -2000, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CanvasLayer:transform")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 0.482968, 1.62451 ),
+"update": 0,
+"values": [ Transform2D( 1, 0, 0, 1, 0, 0 ), Transform2D( 1, 0, 0, 1, -2000, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("StartMenu/MenuCanvas:transform")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Transform2D( 1, 0, 0, 1, -2000, 0 ), Transform2D( 1, 0, 0, 1, 0, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("StartMenu/MenuCanvas/Buttons:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("StartMenu/MenuCanvas/Label:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("CanvasLayer/Menu:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, true, false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("CanvasLayer/GameUI:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, true, false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Map:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, true, false ]
+}
+
+[sub_resource type="Animation" id=30]
+resource_name = "show_game"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("Map:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 0.535887, 1.68179 ),
+"update": 0,
+"values": [ Vector2( -2000, 0 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CanvasLayer:transform")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 0.482968, 1.62451 ),
+"update": 0,
+"values": [ Transform2D( 1, 0, 0, 1, -2000, 0 ), Transform2D( 1, 0, 0, 1, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("StartMenu/MenuCanvas:transform")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Transform2D( 1, 0, 0, 1, 0, 0 ), Transform2D( 1, 0, 0, 1, -2000, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("StartMenu/MenuCanvas/Buttons:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("StartMenu/MenuCanvas/Label:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, true, false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("CanvasLayer/GameUI:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, true ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("CanvasLayer/Menu:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, false, false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Map:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, true ]
+}
+
 [node name="Root" type="Node2D"]
 pause_mode = 2
 script = ExtResource( 23 )
@@ -319,7 +642,6 @@ anims/hide = SubResource( 23 )
 anims/show = SubResource( 24 )
 
 [node name="Menu" type="Control" parent="CanvasLayer"]
-visible = false
 modulate = Color( 0.905882, 0.905882, 0.905882, 1 )
 margin_left = 61.0
 margin_top = 34.0
@@ -330,6 +652,7 @@ margin_bottom = 154.0
 margin_left = 54.0
 margin_right = 216.0
 margin_bottom = 120.0
+rect_scale = Vector2( 1e-05, 1 )
 size_flags_horizontal = 5
 size_flags_vertical = 5
 texture = ExtResource( 18 )
@@ -337,9 +660,6 @@ patch_margin_left = 11
 patch_margin_top = 11
 patch_margin_right = 11
 patch_margin_bottom = 11
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Skills" type="Control" parent="CanvasLayer/Menu/Panel"]
 visible = false
@@ -1319,6 +1639,8 @@ margin_bottom = 40.0
 
 [node name="Map" type="Node2D" parent="."]
 pause_mode = 1
+visible = false
+position = Vector2( -2000, 0 )
 script = ExtResource( 5 )
 
 [node name="Level" parent="Map" instance=ExtResource( 6 )]
@@ -1364,11 +1686,15 @@ map_node = NodePath("../Map")
 
 [node name="StartMenu" type="Node2D" parent="."]
 pause_mode = 2
+position = Vector2( -2000, 0 )
 script = ExtResource( 7 )
 
 [node name="MenuCanvas" type="CanvasLayer" parent="StartMenu"]
+offset = Vector2( -2000, 0 )
+transform = Transform2D( 1, 0, 0, 1, -2000, 0 )
 
 [node name="Buttons" type="Control" parent="StartMenu/MenuCanvas"]
+visible = false
 margin_left = 151.0
 margin_top = 60.0
 margin_right = 205.0
@@ -1528,6 +1854,13 @@ playback_speed = 0.1
 method_call_mode = 1
 anims/Idle = SubResource( 28 )
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+pause_mode = 2
+method_call_mode = 1
+anims/RESET = SubResource( 29 )
+anims/hide_game = SubResource( 31 )
+anims/show_game = SubResource( 30 )
+
 [connection signal="animation_finished" from="CanvasLayer/AnimationPlayer" to="CanvasLayer" method="_on_AnimationPlayer_animation_finished"]
 [connection signal="button_down" from="CanvasLayer/GameUI/PauseButton" to="CanvasLayer" method="_on_PauseButton_button_down"]
 [connection signal="animation_finished" from="CanvasLayer/GameUI/LevelName/AnimationPlayer" to="CanvasLayer" method="_on_AnimationPlayer_animation_finished"]
@@ -1567,5 +1900,7 @@ anims/Idle = SubResource( 28 )
 [connection signal="player_level_up" from="Map/YSort/Player" to="CanvasLayer/Menu/Panel/Skills" method="_on_Player_player_level_up"]
 [connection signal="player_stats_changed" from="Map/YSort/Player" to="CanvasLayer" method="_on_Player_player_stats_changed"]
 [connection signal="player_stats_changed" from="Map/YSort/Player" to="CanvasLayer/Menu/Panel/Inventory" method="_on_Player_player_stats_changed"]
+[connection signal="loaded" from="SaveLoadNode" to="CanvasLayer" method="_on_SaveLoadNode_loaded"]
+[connection signal="saved" from="SaveLoadNode" to="CanvasLayer" method="_on_SaveLoadNode_saved"]
 [connection signal="button_down" from="StartMenu/MenuCanvas/Buttons/ContinueButton" to="StartMenu" method="_on_ContinueButton_button_down"]
 [connection signal="button_down" from="StartMenu/MenuCanvas/Buttons/NewGameButton" to="StartMenu" method="_on_NewGameButton_button_down"]

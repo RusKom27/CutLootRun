@@ -2,7 +2,7 @@ extends Control
 
 var is_entered : bool = false
 
-func _input(event):
+func _input(_event):
 	$AnimationPlayer/Name.rect_scale = Vector2(0,0)
 	$AnimationPlayer/Stats.rect_scale = Vector2(0,0)
 	

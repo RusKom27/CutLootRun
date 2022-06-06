@@ -1,5 +1,8 @@
 extends Node
 
+signal saved
+signal loaded
+
 
 export(NodePath) var map_node
 
@@ -25,41 +28,40 @@ func save_game():
 
 	var enemies = get_tree().get_nodes_in_group("Enemy")
 	for enemy in enemies:
-		var enemy_data = data.Enemies[0]
-		for stat in data.Enemies[0]:
+		var enemy_data = {}
+		for stat in get_data_template().Enemies[0]:
 			if typeof(enemy[stat]) == TYPE_VECTOR2:
 				enemy_data[stat] = var2str(enemy[stat])
 			else:
 				enemy_data[stat] = enemy[stat]
-		data.Enemies.append(enemy_data)
+		if enemy_data.health != 0:
+			data.Enemies.append(enemy_data)
 	data.level = map.current_level
 	file.store_line(to_json(data))
+	emit_signal("saved")
+	var ContinueButton = get_parent().get_node("StartMenu/MenuCanvas/Buttons/ContinueButton")
 	file.close()
+	ContinueButton.disabled = false
+	ContinueButton.modulate = Color.white
 	data = {}
 
 
 func load_game():
 	var map = get_node(map_node)
-	
 	var file = File.new()
 	file.open(SAVE_DIR+SAVE_FILE, File.READ)
 	var data = parse_json(file.get_line())
-#
-#	var player = get_node(player_node)
-#	player.position = str2var(save_dict.player.position)
-#	player.health = str2var(save_dict.player.health)
-#
-#	for enemy in get_tree().get_nodes_in_group("enemy"):
-#		enemy.queue_free()
-#
-#	var game = get_node(game_node)
-#
-#	for enemy_config in save_dict.enemies:
-#		var enemy = load("res://enemy.tscn").instance()
-#		enemy.position = str2var(enemy_config.position)
-#		game.add_child(enemy)
-	print(data)
-	#map.change_lvl("",data)
+	for item in data.Player:
+		var value = data.Player[item]
+		if typeof(value) == TYPE_STRING:
+			data.Player[item] = str2var(value)
+	for item in range(len(data.Enemies)):
+		for stat in data.Enemies[item]:
+			if typeof(data.Enemies[item][stat]) == TYPE_STRING:
+				data.Enemies[item][stat] = str2var(data.Enemies[item][stat])
+	map.change_lvl("",data)
+	emit_signal("loaded")
+	file.close()
 
 func get_date():
 	var datetime = OS.get_datetime()

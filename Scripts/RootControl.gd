@@ -2,21 +2,19 @@ extends Node
 
 
 func _ready():
-
-	#$AnimationPlayer.play("hide_game")
-	$AnimationPlayer.play("show_start_menu")
+	get_tree().paused = true
+	$AnimationPlayer.play("hide_game")
 		
 func start_game(new_game = false):
-	#$AnimationPlayer.play("show_game")
-	$AnimationPlayer.play("hide_start_menu")
-
 	if new_game:
-		$Map.change_lvl("Home")
+		$CanvasLayer.changePauseState()
+		$Map.change_lvl("Home", {}, true)
 	else:
+		$CanvasLayer.changePauseState()
 		$SaveLoadNode.load_game()
-	
+	$AnimationPlayer.play("show_game")
+	get_tree().paused = false
 
 func exit_game():
-
-	#$AnimationPlayer.play("hide_game")
-	$AnimationPlayer.play("show_start_menu")
+	get_tree().paused = true
+	$AnimationPlayer.play("hide_game")

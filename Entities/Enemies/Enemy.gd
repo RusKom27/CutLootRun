@@ -77,12 +77,12 @@ func _physics_process(delta):
 		direction = direction.rotated(rng.randf_range(PI/4, PI/2))
 		bounce_countdown = rng.randi_range(2, 5)
 	if not other_animation_playing:
-		animation(direction)
+		animation()
 	if direction != Vector2.ZERO:
 		RayCast2D.cast_to = direction.normalized() * 16
 
-func animation(direction: Vector2):
-	last_turn = get_animation_direction(last_direction)
+func animation():
+	last_turn = get_animation_direction()
 	if last_turn == "left":
 		AnimatedSprite.flip_h = true
 	else:
@@ -95,7 +95,7 @@ func animation(direction: Vector2):
 		var animation = animation_name.idle
 		AnimatedSprite.play(animation)
 
-func get_animation_direction(direction: Vector2):
+func get_animation_direction():
 	var norm_direction = direction.normalized()
 	if sign(norm_direction.x) <= -1:
 		return "left"
@@ -110,7 +110,7 @@ func arise():
 	AnimatedSprite.play(animation_name.birth)
 
 func hit(damage):
-	health -= damage
+	health = clamp(health - damage, 0, health_max)
 	show_stat_change(-damage)
 	if health <= 0:
 		HealthBar.value = health
